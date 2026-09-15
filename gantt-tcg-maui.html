@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagramme de Gantt — Application TCG MAUI</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22263a;
+    --border: #2e3350;
+    --text: #e8eaf6;
+    --text-muted: #7b82a8;
+    --text-dim: #4a5080;
+    --header-h: 56px;
+    --row-h: 36px;
+    --label-w: 220px;
+    --week-w: 52px;
+    --weeks: 16;
+
+    --c1: #6366f1; /* Cadrage */
+    --c2: #8b5cf6; /* Conception */
+    --c3: #06b6d4; /* Socle technique */
+    --c4: #10b981; /* Catalogue temps réel */
+    --c5: #f59e0b; /* Marché */
+    --c6: #f97316; /* Portefeuille/Cadeau */
+    --c7: #ef4444; /* Qualité */
+    --c8: #ec4899; /* Livraison */
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: 13px;
+    min-height: 100vh;
+    padding: 32px 24px 48px;
+  }
+
+  /* ── Header ── */
+  .page-header {
+    margin-bottom: 28px;
+  }
+  .page-header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    color: var(--text);
+  }
+  .page-header p {
+    margin-top: 4px;
+    color: var(--text-muted);
+    font-size: 13px;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    margin-bottom: 28px;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+
+  /* ── Gantt wrapper ── */
+  .gantt-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .gantt {
+    min-width: calc(var(--label-w) + var(--week-w) * var(--weeks));
+    width: 100%;
+  }
+
+  /* ── Column header (weeks) ── */
+  .gantt-head {
+    display: flex;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--surface);
+  }
+  .gantt-head-label {
+    width: var(--label-w);
+    min-width: var(--label-w);
+    padding: 0 16px;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--text-muted);
+    border-right: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .gantt-head-weeks {
+    display: flex;
+    flex: 1;
+  }
+  .week-col {
+    flex: 1;
+    min-width: var(--week-w);
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-right: 1px solid var(--border);
+    letter-spacing: 0.3px;
+  }
+  .week-col:last-child { border-right: none; }
+  .week-col.month-start {
+    color: var(--text);
+    background: rgba(255,255,255,0.03);
+  }
+
+  /* ── Milestone group ── */
+  .milestone-group {}
+  .milestone-group + .milestone-group {
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── Milestone header row ── */
+  .milestone-row {
+    display: flex;
+    height: 40px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+  .milestone-label {
+    width: var(--label-w);
+    min-width: var(--label-w);
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 12px;
+    border-right: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .milestone-dot {
+    width: 10px; height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .milestone-bar-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .milestone-span-bar {
+    position: absolute;
+    height: 6px;
+    border-radius: 3px;
+    opacity: 0.25;
+  }
+
+  /* ── Task row ── */
+  .task-row {
+    display: flex;
+    height: var(--row-h);
+    border-bottom: 1px solid rgba(46,51,80,0.5);
+  }
+  .task-row:last-child { border-bottom: none; }
+  .task-label {
+    width: var(--label-w);
+    min-width: var(--label-w);
+    padding: 0 16px 0 28px;
+    display: flex;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    border-right: 1px solid var(--border);
+    flex-shrink: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .task-bar-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Week grid lines inside bar areas */
+  .task-bar-area::before,
+  .milestone-bar-area::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      to right,
+      transparent,
+      transparent calc(100% / 16 - 1px),
+      var(--border) calc(100% / 16 - 1px),
+      var(--border) calc(100% / 16)
+    );
+    pointer-events: none;
+    opacity: 0.4;
+  }
+
+  .task-bar {
+    position: absolute;
+    height: 18px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 7px;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: filter 0.15s;
+    cursor: default;
+  }
+  .task-bar:hover {
+    filter: brightness(1.15);
+    z-index: 5;
+  }
+
+  /* Tooltip */
+  .task-bar[data-tip]:hover::after {
+    content: attr(data-tip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e2235;
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-size: 11px;
+    font-weight: 400;
+    padding: 5px 9px;
+    border-radius: 6px;
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 100;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  }
+
+  /* ── Today line ── */
+  .today-line {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: #facc15;
+    opacity: 0.8;
+    z-index: 8;
+    pointer-events: none;
+  }
+  .today-line::before {
+    content: 'Aujourd\'hui';
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 9px;
+    font-weight: 700;
+    color: #facc15;
+    white-space: nowrap;
+  }
+
+  /* ── Footer ── */
+  .gantt-footer {
+    margin-top: 24px;
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    align-items: center;
+    color: var(--text-dim);
+    font-size: 11px;
+  }
+  .gantt-footer span { display: flex; align-items: center; gap: 5px; }
+  .today-swatch { width: 14px; height: 3px; background: #facc15; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Diagramme de Gantt — Application TCG MAUI</h1>
+  <p>Projet .NET MAUI · Trading de cartes TCG · 16 semaines · Démarrage 15 septembre 2026</p>
+</div>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:var(--c1)"></div>1. Cadrage</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--c2)"></div>2. Conception</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--c3)"></div>3. Socle technique</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--c4)"></div>4. Catalogue temps réel</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--c5)"></div>5. Marché</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--c6)"></div>6. Portefeuille / Cadeau</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--c7)"></div>7. Qualité</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--c8)"></div>8. Livraison</div>
+</div>
+
+<!-- Gantt chart -->
+<div class="gantt-wrapper">
+  <div class="gantt" id="gantt">
+
+    <!-- Week header -->
+    <div class="gantt-head">
+      <div class="gantt-head-label">Tâche</div>
+      <div class="gantt-head-weeks" id="week-header"></div>
+    </div>
+
+    <!-- Rows injected by JS -->
+    <div id="gantt-body"></div>
+
+  </div>
+</div>
+
+<div class="gantt-footer">
+  <span><div class="today-swatch"></div> Aujourd'hui (S1)</span>
+  <span>· Les barres se chevauchent légèrement pour refléter les dépendances réelles</span>
+  <span>· Survolez une barre pour voir les détails</span>
+</div>
+
+<script>
+// ─── Data ───────────────────────────────────────────────────────────────────
+// Weeks are 1-indexed (1 = S1). start/end are inclusive week numbers (1–16).
+const MILESTONES = [
+  {
+    id: 1, label: "Cadrage", color: "var(--c1)",
+    start: 1, end: 2,
+    tasks: [
+      { label: "Lecture cahier des charges", start: 1, end: 1, tip: "S1 · Analyse des exigences fonctionnelles" },
+      { label: "Mise en place dépôt Git", start: 1, end: 1, tip: "S1 · Initialisation repo, branches, CI" },
+      { label: "Matrice des responsabilités", start: 1, end: 2, tip: "S1–S2 · RACI, rôles, planning" },
+      { label: "Analyse des exigences", start: 1, end: 2, tip: "S1–S2 · EF001–EF010, backlog initial" },
+    ]
+  },
+  {
+    id: 2, label: "Conception", color: "var(--c2)",
+    start: 2, end: 5,
+    tasks: [
+      { label: "Diagramme de contexte", start: 2, end: 2, tip: "S2 · Vue système globale" },
+      { label: "Cas d'utilisation (UML)", start: 2, end: 3, tip: "S2–S3 · Acteurs, scénarios principaux" },
+      { label: "Diagramme de classes", start: 3, end: 4, tip: "S3–S4 · Modèle domaine, entités" },
+      { label: "Diagrammes de séquences (×5)", start: 3, end: 5, tip: "S3–S5 · Auth, catalogue, marché, portefeuille, cadeau" },
+      { label: "Diagramme de composants", start: 4, end: 4, tip: "S4 · Architecture modulaire" },
+      { label: "Diagrammes états & activité", start: 4, end: 5, tip: "S4–S5 · Cycle de vie carte, flux commande" },
+      { label: "Diagramme de déploiement", start: 5, end: 5, tip: "S5 · Infrastructure, cloud, mobile" },
+      { label: "Dictionnaire & décisions archi", start: 4, end: 5, tip: "S4–S5 · ADR, glossaire technique" },
+    ]
+  },
+  {
+    id: 3, label: "Socle technique", color: "var(--c3)",
+    start: 4, end: 7,
+    tasks: [
+      { label: "Architecture MVVM", start: 4, end: 5, tip: "S4–S5 · Structure projet, couches" },
+      { label: "Injection de dépendances", start: 5, end: 5, tip: "S5 · DI container, services" },
+      { label: "Navigation & routing", start: 5, end: 6, tip: "S5–S6 · Shell navigation, deep links" },
+      { label: "Client HTTP centralisé", start: 6, end: 6, tip: "S6 · HttpClientFactory, intercepteurs" },
+      { label: "Stockage sécurisé du jeton", start: 6, end: 7, tip: "S6–S7 · SecureStorage, refresh token" },
+      { label: "Authentification (login/logout)", start: 6, end: 7, tip: "S6–S7 · JWT, OAuth2, biométrie" },
+    ]
+  },
+  {
+    id: 4, label: "Catalogue temps réel", color: "var(--c4)",
+    start: 7, end: 10,
+    tasks: [
+      { label: "Écran catalogue cartes", start: 7, end: 8, tip: "S7–S8 · Liste, filtres, recherche" },
+      { label: "Fiche détail carte", start: 8, end: 9, tip: "S8–S9 · Stats, image, historique prix" },
+      { label: "Cours temps réel (SignalR)", start: 8, end: 10, tip: "S8–S10 · WebSocket, hub, reconnexion" },
+      { label: "Cache local (SQLite)", start: 9, end: 10, tip: "S9–S10 · Stratégie cache, TTL" },
+      { label: "Gestion hors-ligne", start: 9, end: 10, tip: "S9–S10 · Sync différée, indicateur réseau" },
+    ]
+  },
+  {
+    id: 5, label: "Marché", color: "var(--c5)",
+    start: 9, end: 12,
+    tasks: [
+      { label: "Achat & vente de cartes", start: 9, end: 10, tip: "S9–S10 · EF030–034, flux transaction" },
+      { label: "Réservation de cartes", start: 10, end: 11, tip: "S10–S11 · EF035–038, lock temporaire" },
+      { label: "Ordres automatiques", start: 10, end: 12, tip: "S10–S12 · EF039–044, triggers prix" },
+      { label: "Idempotence & concurrence", start: 11, end: 12, tip: "S11–S12 · Clés idempotence, optimistic lock" },
+    ]
+  },
+  {
+    id: 6, label: "Portefeuille / Cadeau", color: "var(--c6)",
+    start: 11, end: 13,
+    tasks: [
+      { label: "Portefeuille (valeur, gain/perte)", start: 11, end: 12, tip: "S11–S12 · EF050–055, calcul performance" },
+      { label: "Transfert de carte (cadeau)", start: 12, end: 13, tip: "S12–S13 · EF056–060, confirmation" },
+      { label: "Historique transactions", start: 12, end: 13, tip: "S12–S13 · EF061–064, export, filtres" },
+    ]
+  },
+  {
+    id: 7, label: "Qualité", color: "var(--c7)",
+    start: 12, end: 15,
+    tasks: [
+      { label: "Tests unitaires & doubles", start: 12, end: 13, tip: "S12–S13 · xUnit, Moq, couverture ≥80%" },
+      { label: "Contrats simulés (mocks)", start: 13, end: 14, tip: "S13–S14 · Wiremock, contrats API" },
+      { label: "Plan de tests & rapport", start: 13, end: 14, tip: "S13–S14 · Scénarios, résultats, bugs" },
+      { label: "Matrice de traçabilité", start: 14, end: 15, tip: "S14–S15 · EF ↔ tests, couverture" },
+      { label: "Analyse de sécurité", start: 14, end: 15, tip: "S14–S15 · OWASP Mobile, pentest léger" },
+    ]
+  },
+  {
+    id: 8, label: "Livraison", color: "var(--c8)",
+    start: 15, end: 16,
+    tasks: [
+      { label: "README & guide utilisateur", start: 15, end: 15, tip: "S15 · Installation, config, screenshots" },
+      { label: "Dossier de conception final", start: 15, end: 16, tip: "S15–S16 · Compilation tous livrables" },
+      { label: "Démonstration", start: 16, end: 16, tip: "S16 · Démo live, slides, Q&A" },
+    ]
+  }
+];
+
+const TOTAL_WEEKS = 16;
+
+// Month labels (S1 = week of Sep 15, 2026)
+const MONTH_STARTS = { 3: "Oct", 7: "Nov", 11: "Déc", 15: "Jan" };
+
+// ─── Build week header ───────────────────────────────────────────────────────
+const weekHeader = document.getElementById('week-header');
+for (let w = 1; w <= TOTAL_WEEKS; w++) {
+  const div = document.createElement('div');
+  div.className = 'week-col' + (MONTH_STARTS[w] ? ' month-start' : '');
+  div.textContent = MONTH_STARTS[w] ? `${MONTH_STARTS[w]} S${w}` : `S${w}`;
+  weekHeader.appendChild(div);
+}
+
+// ─── Helper: position bar ────────────────────────────────────────────────────
+function barStyle(start, end, color, opacity) {
+  const left = ((start - 1) / TOTAL_WEEKS * 100).toFixed(3) + '%';
+  const width = ((end - start + 1) / TOTAL_WEEKS * 100).toFixed(3) + '%';
+  return `left:${left};width:${width};background:${color};${opacity ? 'opacity:' + opacity + ';' : ''}`;
+}
+
+// ─── Build body ──────────────────────────────────────────────────────────────
+const body = document.getElementById('gantt-body');
+
+MILESTONES.forEach(ms => {
+  const group = document.createElement('div');
+  group.className = 'milestone-group';
+
+  // Milestone header row
+  const msRow = document.createElement('div');
+  msRow.className = 'milestone-row';
+  msRow.innerHTML = `
+    <div class="milestone-label">
+      <div class="milestone-dot" style="background:${ms.color}"></div>
+      ${ms.id}. ${ms.label}
+    </div>
+    <div class="milestone-bar-area">
+      <div class="milestone-span-bar" style="${barStyle(ms.start, ms.end, ms.color, null)}"></div>
+    </div>`;
+  group.appendChild(msRow);
+
+  // Task rows
+  ms.tasks.forEach(task => {
+    const row = document.createElement('div');
+    row.className = 'task-row';
+    row.innerHTML = `
+      <div class="task-label" title="${task.label}">${task.label}</div>
+      <div class="task-bar-area">
+        <div class="task-bar"
+          style="${barStyle(task.start, task.end, ms.color, null)}"
+          data-tip="${task.tip}">
+          ${task.start === task.end ? '' : task.label.length > 18 ? '' : task.label}
+        </div>
+      </div>`;
+    group.appendChild(row);
+  });
+
+  body.appendChild(group);
+});
+
+// ─── Today line (S1 = start) ─────────────────────────────────────────────────
+// Today is Sep 15 = start of S1, so position = 0 (left edge of S1)
+document.querySelectorAll('.task-bar-area, .milestone-bar-area').forEach(area => {
+  const line = document.createElement('div');
+  line.className = 'today-line';
+  line.style.left = (0.5 / TOTAL_WEEKS * 100).toFixed(3) + '%';
+  area.appendChild(line);
+});
+</script>
+</body>
+</html>
