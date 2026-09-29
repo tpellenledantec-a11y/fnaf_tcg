@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FnafTCG</name>
+    </assembly>
+    <members>
+        <member name="T:FnafTCG.VuesModeles.CartesVueModele">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.CartesVueModele.CartesPossedees">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.CartesVueModele.cartesPossedees"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.CartesVueModele.CarteSelectionnee">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.CartesVueModele.carteSelectionnee"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.CartesVueModele.Message">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.CartesVueModele.message"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.CartesVueModele.EstOccupe">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.CartesVueModele.estOccupe"/>
+        </member>
+        <member name="F:FnafTCG.VuesModeles.CartesVueModele.chargerCartesCommand">
+            <summary>The backing field for <see cref="P:FnafTCG.VuesModeles.CartesVueModele.ChargerCartesCommand"/>.</summary>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.CartesVueModele.ChargerCartesCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FnafTCG.VuesModeles.CartesVueModele.ChargerCartesAsync"/>.</summary>
+        </member>
+        <member name="F:FnafTCG.VuesModeles.CartesVueModele.gererOffreCommand">
+            <summary>The backing field for <see cref="P:FnafTCG.VuesModeles.CartesVueModele.GererOffreCommand"/>.</summary>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.CartesVueModele.GererOffreCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FnafTCG.VuesModeles.CartesVueModele.GererOffreAsync"/>.</summary>
+        </member>
+        <member name="T:FnafTCG.VuesModeles.ConnexionVueModele">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.ConnexionVueModele.Identifiant">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.ConnexionVueModele.identifiant"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.ConnexionVueModele.MotDePasse">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.ConnexionVueModele.motDePasse"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.ConnexionVueModele.Message">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.ConnexionVueModele.message"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.ConnexionVueModele.EstOccupe">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.ConnexionVueModele.estOccupe"/>
+        </member>
+        <member name="F:FnafTCG.VuesModeles.ConnexionVueModele.seConnecterCommand">
+            <summary>The backing field for <see cref="P:FnafTCG.VuesModeles.ConnexionVueModele.SeConnecterCommand"/>.</summary>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.ConnexionVueModele.SeConnecterCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FnafTCG.VuesModeles.ConnexionVueModele.SeConnecterAsync"/>.</summary>
+        </member>
+        <member name="T:FnafTCG.VuesModeles.OffreVueModele">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.OffreVueModele.OffreCourante">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.OffreVueModele.offreCourante"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.OffreVueModele.PrixSaisi">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.OffreVueModele.prixSaisi"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.OffreVueModele.Message">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.OffreVueModele.message"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.OffreVueModele.EstOccupe">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.OffreVueModele.estOccupe"/>
+        </member>
+        <member name="F:FnafTCG.VuesModeles.OffreVueModele.chargerOffreCommand">
+            <summary>The backing field for <see cref="P:FnafTCG.VuesModeles.OffreVueModele.ChargerOffreCommand"/>.</summary>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.OffreVueModele.ChargerOffreCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FnafTCG.VuesModeles.OffreVueModele.ChargerOffreAsync"/>.</summary>
+        </member>
+        <member name="F:FnafTCG.VuesModeles.OffreVueModele.creerOffreCommand">
+            <summary>The backing field for <see cref="P:FnafTCG.VuesModeles.OffreVueModele.CreerOffreCommand"/>.</summary>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.OffreVueModele.CreerOffreCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FnafTCG.VuesModeles.OffreVueModele.CreerOffreAsync"/>.</summary>
+        </member>
+        <member name="F:FnafTCG.VuesModeles.OffreVueModele.modifierOffreCommand">
+            <summary>The backing field for <see cref="P:FnafTCG.VuesModeles.OffreVueModele.ModifierOffreCommand"/>.</summary>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.OffreVueModele.ModifierOffreCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FnafTCG.VuesModeles.OffreVueModele.ModifierOffreAsync"/>.</summary>
+        </member>
+        <member name="F:FnafTCG.VuesModeles.OffreVueModele.supprimerOffreCommand">
+            <summary>The backing field for <see cref="P:FnafTCG.VuesModeles.OffreVueModele.SupprimerOffreCommand"/>.</summary>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.OffreVueModele.SupprimerOffreCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FnafTCG.VuesModeles.OffreVueModele.SupprimerOffreAsync"/>.</summary>
+        </member>
+        <member name="T:FnafTCG.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CartesPossedees">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CartesPossedees" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CarteSelectionnee">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CarteSelectionnee" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Message">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Message" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EstOccupe">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EstOccupe" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EstDisponible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EstDisponible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Identifiant">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Identifiant" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MotDePasse">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MotDePasse" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.OffreCourante">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "OffreCourante" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PrixSaisi">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PrixSaisi" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CartesPossedees">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CartesPossedees" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CarteSelectionnee">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CarteSelectionnee" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Message">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Message" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EstOccupe">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EstOccupe" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EstDisponible">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EstDisponible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Identifiant">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Identifiant" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MotDePasse">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MotDePasse" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.OffreCourante">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "OffreCourante" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PrixSaisi">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PrixSaisi" generated properties.</summary>
+        </member>
+    </members>
+</doc>
