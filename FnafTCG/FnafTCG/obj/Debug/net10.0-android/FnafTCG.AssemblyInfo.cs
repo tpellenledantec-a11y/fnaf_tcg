@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FnafTCG")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+c4b7f9a025d9ab3625f0ea20a0e427e5be6ce17d")]
 [assembly: System.Reflection.AssemblyProductAttribute("FnafTCG")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FnafTCG")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,17 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\",
+  "WorkspaceRootPath": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\utilisateur\\source\\repos\\fnaftcg\\fnaftcg\\services\\serviceapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\timot\\documents\\github\\fnaf_tcg\\fnaftcg\\fnaftcg\\vues\\quotepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|solutionrelative:fnaftcg\\vues\\quotepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\timot\\documents\\github\\fnaf_tcg\\fnaftcg\\fnaftcg\\vues\\quotepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|solutionrelative:fnaftcg\\vues\\quotepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\timot\\documents\\github\\fnaf_tcg\\fnaftcg\\fnaftcg\\services\\serviceapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|solutionrelative:fnaftcg\\services\\serviceapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\utilisateur\\source\\repos\\fnaftcg\\fnaftcg\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\timot\\documents\\github\\fnaf_tcg\\fnaftcg\\fnaftcg\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|solutionrelative:fnaftcg\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\utilisateur\\source\\repos\\fnaftcg\\fnaftcg\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\timot\\documents\\github\\fnaf_tcg\\fnaftcg\\fnaftcg\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|solutionrelative:fnaftcg\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
@@ -25,47 +33,67 @@
           "SelectedChildIndex": 1,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{b1e99781-ab81-11d0-b683-00aa00a3ee26}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "QuotePage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\Vues\\QuotePage.xaml.cs",
+              "RelativeDocumentMoniker": "FnafTCG\\Vues\\QuotePage.xaml.cs",
+              "ToolTip": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\Vues\\QuotePage.xaml.cs*",
+              "RelativeToolTip": "FnafTCG\\Vues\\QuotePage.xaml.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-09-29T14:33:42.588Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "QuotePage.xaml",
+              "DocumentMoniker": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\Vues\\QuotePage.xaml",
+              "RelativeDocumentMoniker": "FnafTCG\\Vues\\QuotePage.xaml",
+              "ToolTip": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\Vues\\QuotePage.xaml",
+              "RelativeToolTip": "FnafTCG\\Vues\\QuotePage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2026-09-29T14:04:53.324Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "ServiceApi.cs",
-              "DocumentMoniker": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\Services\\ServiceApi.cs",
+              "DocumentMoniker": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\Services\\ServiceApi.cs",
               "RelativeDocumentMoniker": "FnafTCG\\Services\\ServiceApi.cs",
-              "ToolTip": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\Services\\ServiceApi.cs",
+              "ToolTip": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\Services\\ServiceApi.cs",
               "RelativeToolTip": "FnafTCG\\Services\\ServiceApi.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBcAAAAiAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-09-29T12:06:14.562Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "App.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\App.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\App.xaml.cs",
               "RelativeDocumentMoniker": "FnafTCG\\App.xaml.cs",
-              "ToolTip": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\App.xaml.cs",
+              "ToolTip": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\App.xaml.cs",
               "RelativeToolTip": "FnafTCG\\App.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-29T12:04:47.66Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-29T12:04:47.66Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "AppShell.xaml",
-              "DocumentMoniker": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\AppShell.xaml",
+              "DocumentMoniker": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\AppShell.xaml",
               "RelativeDocumentMoniker": "FnafTCG\\AppShell.xaml",
-              "ToolTip": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\AppShell.xaml",
+              "ToolTip": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\AppShell.xaml",
               "RelativeToolTip": "FnafTCG\\AppShell.xaml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-09-29T12:04:33.855Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-29T12:04:33.855Z"
             }
           ]
         }

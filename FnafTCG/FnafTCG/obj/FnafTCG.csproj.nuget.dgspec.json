@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\FnafTCG.csproj": {}
+    "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\FnafTCG.csproj": {}
   },
   "projects": {
-    "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\FnafTCG.csproj": {
+    "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\FnafTCG.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\FnafTCG.csproj",
+        "projectUniqueName": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\FnafTCG.csproj",
         "projectName": "FnafTCG",
-        "projectPath": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\FnafTCG.csproj",
-        "packagesPath": "C:\\Users\\utilisateur\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\obj\\",
+        "projectPath": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\FnafTCG.csproj",
+        "packagesPath": "C:\\Users\\timot\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\utilisateur\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\timot\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
