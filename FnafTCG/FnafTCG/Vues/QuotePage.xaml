@@ -2,13 +2,154 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FnafTCG.Vues.QuotePage"
-             Title="QuotePage">
-    <VerticalStackLayout>
-        <Button Text="<" Clicked="OnBackButtonClicked"/>
-        
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             Title="QuotePage"
+             BackgroundColor="#121212"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="Auto, *, Auto">
+
+        <!-- 1. EN-TÊTE (Barre de navigation personnalisée) -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Padding="16, 12" VerticalOptions="Center">
+            <ImageButton Source="back_arrow.png" 
+                         WidthRequest="24" HeightRequest="24" 
+                         BackgroundColor="Transparent"
+                         VerticalOptions="Center" />
+            <Label Grid.Column="1" 
+                   Text="Historique du Cours" 
+                   TextColor="White" 
+                   FontSize="18" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" 
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <!-- CONTENU PRINCIPAL (Défilable) -->
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Spacing="20" Padding="16">
+
+                <!-- SECTION PRIX COURANT -->
+                <VerticalStackLayout Spacing="4">
+                    <Label Text="COURANT TEMPS RÉEL" 
+                           TextColor="#8E8E93" 
+                           FontSize="10" 
+                           CharacterSpacing="1" />
+
+                    <Grid ColumnDefinitions="Auto, *">
+                        <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                            <Label Text="249,00" 
+                                   TextColor="#F39C12" 
+                                   FontSize="32" 
+                                   FontAttributes="Bold" />
+                            <Label Text="€" 
+                                   TextColor="#F39C12" 
+                                   FontSize="32" 
+                                   FontAttributes="Bold" />
+                        </HorizontalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
+                            <Label Text="+ 24,50 % (24h)" 
+                                   TextColor="#2ECC71" 
+                                   FontSize="12" 
+                                   HorizontalOptions="End" />
+                            <Label Text="Volume : 12 cartes" 
+                                   TextColor="#8E8E93" 
+                                   FontSize="11" 
+                                   HorizontalOptions="End" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+
+                <!-- BOUTONS DE SÉLECTION DE PÉRIODE (24h, 7j, 30j, 1an) -->
+                <Grid ColumnDefinitions="*, *, *, *" ColumnSpacing="8">
+                    <!-- Bouton Actif (24h) -->
+                    <Button Grid.Column="0" 
+                            Text="24h" 
+                            BackgroundColor="#F39C12" 
+                            TextColor="Black" 
+                            FontAttributes="Bold"
+                            CornerRadius="8" 
+                            HeightRequest="36" />
+                    <!-- Boutons Inactifs -->
+                    <Button Grid.Column="1" Text="7j" BackgroundColor="#1E1E1E" TextColor="#8E8E93" CornerRadius="8" HeightRequest="36" />
+                    <Button Grid.Column="2" Text="30j" BackgroundColor="#1E1E1E" TextColor="#8E8E93" CornerRadius="8" HeightRequest="36" />
+                    <Button Grid.Column="3" Text="1an" BackgroundColor="#1E1E1E" TextColor="#8E8E93" CornerRadius="8" HeightRequest="36" />
+                </Grid>
+
+                <!-- ZONE DU GRAPHIQUE (Border pour simuler le conteneur arrondi) -->
+                <Border BackgroundColor="#1A1A1A" 
+                        Stroke="#2C2C2E" 
+                        StrokeThickness="1" 
+                        StrokeShape="RoundRectangle 12" 
+                        HeightRequest="220" 
+                        Padding="12">
+                    <Grid>
+                        <!-- Remplacez ceci par votre composant de graphique (ex: Microcharts ou SkiaSharp) -->
+                        <Label Text="[ Zone Graphique ]" 
+                               TextColor="#555555" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center" />
+                    </Grid>
+                </Border>
+
+                <!-- SECTION HISTORIQUE DES ÉCHANGES -->
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Historique des échanges récents" 
+                           TextColor="White" 
+                           FontSize="15" 
+                           FontAttributes="Bold" />
+
+                    <!-- Liste d'éléments (Vous pourrez la lier à un CollectionView via le C#) -->
+                    <VerticalStackLayout Spacing="10">
+
+                        <!-- Élément 1 : Vente -->
+                        <Grid Padding="0, 8">
+                            <Label Text="Vendu par @William_A" TextColor="#CCCCCC" VerticalOptions="Center" />
+                            <Label Text="249,00 €" TextColor="White" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView HeightRequest="1" BackgroundColor="#222222" />
+
+                        <!-- Élément 2 : Achat -->
+                        <Grid Padding="0, 8">
+                            <Label Text="Acheté par @Chica_Fan" TextColor="#CCCCCC" VerticalOptions="Center" />
+                            <Label Text="210,00 €" TextColor="White" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center" />
+                        </Grid>
+                        <BoxView HeightRequest="1" BackgroundColor="#222222" />
+
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- 3. BARRE DE NAVIGATION INFÉRIEURE -->
+        <Border Grid.Row="2" 
+                BackgroundColor="#161618" 
+                Stroke="#222222" 
+                StrokeThickness="1" 
+                Padding="8, 6">
+            <Grid ColumnDefinitions="*, *, *, *">
+                <!-- Marché (Actif) -->
+                <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="2">
+                    <Label Text="🛒" FontSize="18" HorizontalOptions="Center" />
+                    <Label Text="Marché" TextColor="#F39C12" FontSize="10" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <!-- Collection -->
+                <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="2">
+                    <Label Text="✖" FontSize="18" HorizontalOptions="Center" TextColor="#8E8E93" />
+                    <Label Text="Collection" TextColor="#8E8E93" FontSize="10" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <!-- Alertes -->
+                <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="2">
+                    <Label Text="🔔" FontSize="18" HorizontalOptions="Center" TextColor="#8E8E93" />
+                    <Label Text="Alertes" TextColor="#8E8E93" FontSize="10" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+                <!-- Terminal -->
+                <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" Spacing="2">
+                    <Label Text=">_" FontSize="18" HorizontalOptions="Center" TextColor="#8E8E93" />
+                    <Label Text="Terminal" TextColor="#8E8E93" FontSize="10" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Grid>
+        </Border>
+
+    </Grid>
 </ContentPage>

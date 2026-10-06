@@ -42,8 +42,7 @@
               "RelativeToolTip": "FnafTCG\\Vues\\QuotePage.xaml.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-29T14:33:42.588Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-29T14:33:42.588Z"
             },
             {
               "$type": "Document",
@@ -51,9 +50,9 @@
               "Title": "QuotePage.xaml",
               "DocumentMoniker": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\Vues\\QuotePage.xaml",
               "RelativeDocumentMoniker": "FnafTCG\\Vues\\QuotePage.xaml",
-              "ToolTip": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\Vues\\QuotePage.xaml",
-              "RelativeToolTip": "FnafTCG\\Vues\\QuotePage.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAIAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\timot\\Documents\\GitHub\\fnaf_tcg\\FnafTCG\\FnafTCG\\Vues\\QuotePage.xaml*",
+              "RelativeToolTip": "FnafTCG\\Vues\\QuotePage.xaml*",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAYwAQAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2026-09-29T14:04:53.324Z",
               "EditorCaption": ""
@@ -68,8 +67,7 @@
               "RelativeToolTip": "FnafTCG\\Services\\ServiceApi.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAABcAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-29T12:06:14.562Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-29T12:06:14.562Z"
             },
             {
               "$type": "Document",
