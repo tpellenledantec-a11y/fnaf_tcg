@@ -1,8 +1,9 @@
-using System.Globalization;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FnafTCG.Modeles;
 using FnafTCG.Services;
+using FnafTCG.Vues;
+using System.Globalization;
 
 namespace FnafTCG.VuesModeles;
 
@@ -84,6 +85,29 @@ public partial class OffreVueModele : ObservableObject
                     CultureInfo.CurrentCulture);
                 Message = "Offre retrouvée.";
             }
+        }
+        catch (Exception erreur)
+        {
+            Message = erreur.Message;
+        }
+        finally
+        {
+            EstOccupe = false;
+        }
+    }
+
+    [RelayCommand]
+    private async Task ChargerQuotes()
+    {
+        if (EstOccupe)
+            return;
+
+        EstOccupe = true;
+        try
+        {
+            await Application.Current!.Windows[0].Page!
+                .Navigation.PushAsync(
+                    new QuotePage());
         }
         catch (Exception erreur)
         {

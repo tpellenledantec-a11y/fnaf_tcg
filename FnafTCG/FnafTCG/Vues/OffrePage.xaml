@@ -26,7 +26,10 @@
                         Command="{Binding ModifierOffreCommand}" />
                 <Button Text="Supprimer l'offre"
                         Command="{Binding SupprimerOffreCommand}" />
+                <Button Text="page quotes test"
+                    Command="{Binding ChargerQuotesCommand}" />
             </VerticalStackLayout>
+            
             <ActivityIndicator
                 IsRunning="{Binding EstOccupe}"
                 IsVisible="{Binding EstOccupe}" />

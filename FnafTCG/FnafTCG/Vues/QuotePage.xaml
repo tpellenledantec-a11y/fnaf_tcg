@@ -1,155 +1,475 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="FnafTCG.Vues.QuotePage"
-             Title="QuotePage"
-             BackgroundColor="#121212"
-             Shell.NavBarIsVisible="False">
 
-    <Grid RowDefinitions="Auto, *, Auto">
+<ContentPage
+    x:Class="FnafTCG.Vues.QuotePage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:FnafTCG.Vues"
+    x:DataType="local:QuotePage"
+    Title="Historique du cours"
+    BackgroundColor="#121316"
+    NavigationPage.HasNavigationBar="False"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
 
-        <!-- 1. EN-TÊTE (Barre de navigation personnalisée) -->
-        <Grid Grid.Row="0" ColumnDefinitions="Auto, *" Padding="16, 12" VerticalOptions="Center">
-            <ImageButton Source="back_arrow.png" 
-                         WidthRequest="24" HeightRequest="24" 
-                         BackgroundColor="Transparent"
-                         VerticalOptions="Center" />
-            <Label Grid.Column="1" 
-                   Text="Historique du Cours" 
-                   TextColor="White" 
-                   FontSize="18" 
-                   FontAttributes="Bold" 
-                   HorizontalOptions="Center" 
-                   VerticalOptions="Center" />
+    <ContentPage.Resources>
+
+        <!-- Texte par défaut -->
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="#FFFFFF"/>
+            <Setter Property="FontAutoScalingEnabled" Value="True"/>
+        </Style>
+
+        <!-- Filtres -->
+        <Style x:Key="TimeFilterButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#1F2228"/>
+            <Setter Property="TextColor" Value="#9EA3B0"/>
+            <Setter Property="BorderWidth" Value="0"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Margin" Value="4,0"/>
+            <Setter Property="Padding" Value="12,8"/>
+            <Setter Property="MinimumWidthRequest" Value="0"/>
+            <Setter Property="MinimumHeightRequest" Value="40"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter
+                                    Property="BackgroundColor"
+                                    Value="#2A2E37"/>
+                                <Setter
+                                    Property="TextColor"
+                                    Value="#FFFFFF"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.75"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <!-- Un état actif séparé conserve sa couleur au survol -->
+        <Style
+            x:Key="ActiveTimeFilterButtonStyle"
+            TargetType="Button"
+            BasedOn="{StaticResource TimeFilterButtonStyle}">
+
+            <Setter Property="BackgroundColor" Value="#FFAE19"/>
+            <Setter Property="TextColor" Value="#121316"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal"/>
+                        <VisualState x:Name="PointerOver"/>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Opacity" Value="0.75"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+
+        <Style x:Key="BackButtonStyle" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="TextColor" Value="#FFFFFF"/>
+            <Setter Property="BorderWidth" Value="0"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="WidthRequest" Value="32"/>
+            <Setter Property="MinimumWidthRequest" Value="32"/>
+            <Setter Property="MinimumHeightRequest" Value="44"/>
+        </Style>
+
+        <Style x:Key="NavItemStyle" TargetType="VerticalStackLayout">
+            <Setter Property="Spacing" Value="4"/>
+            <Setter Property="Padding" Value="0,4"/>
+            <Setter Property="HorizontalOptions" Value="Fill"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+        </Style>
+
+        <Style x:Key="NavIconStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="TextColor" Value="#73798C"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="NavTextStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="TextColor" Value="#73798C"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        </Style>
+
+    </ContentPage.Resources>
+
+    <Grid
+        Padding="16,16,16,8"
+        RowDefinitions="Auto,Auto,Auto,Auto,*,Auto">
+
+        <!-- 1. En-tête -->
+        <Grid
+            Grid.Row="0"
+            ColumnDefinitions="Auto,*"
+            ColumnSpacing="12"
+            Margin="0,0,0,24">
+
+            <Button
+                x:Name="BtnBack"
+                Text="❮"
+                Style="{StaticResource BackButtonStyle}"
+                Clicked="BtnBack_Clicked"
+                SemanticProperties.Description="Retour"/>
+
+            <Label
+                Grid.Column="1"
+                Text="Historique du Cours"
+                FontSize="20"
+                FontAttributes="Bold"
+                VerticalOptions="Center"/>
         </Grid>
 
-        <!-- CONTENU PRINCIPAL (Défilable) -->
-        <ScrollView Grid.Row="1">
-            <VerticalStackLayout Spacing="20" Padding="16">
+        <!-- 2. Prix courant et variation -->
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*,Auto"
+            ColumnSpacing="8"
+            Margin="0,0,0,20">
 
-                <!-- SECTION PRIX COURANT -->
-                <VerticalStackLayout Spacing="4">
-                    <Label Text="COURANT TEMPS RÉEL" 
-                           TextColor="#8E8E93" 
-                           FontSize="10" 
-                           CharacterSpacing="1" />
+            <VerticalStackLayout Spacing="6">
 
-                    <Grid ColumnDefinitions="Auto, *">
-                        <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
-                            <Label Text="249,00" 
-                                   TextColor="#F39C12" 
-                                   FontSize="32" 
-                                   FontAttributes="Bold" />
-                            <Label Text="€" 
-                                   TextColor="#F39C12" 
-                                   FontSize="32" 
-                                   FontAttributes="Bold" />
-                        </HorizontalStackLayout>
+                <Label
+                    Text="COURANT  TEMPS  RÉEL"
+                    FontSize="11"
+                    FontAttributes="Bold"
+                    TextColor="#73798C"/>
 
-                        <VerticalStackLayout Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
-                            <Label Text="+ 24,50 % (24h)" 
-                                   TextColor="#2ECC71" 
-                                   FontSize="12" 
-                                   HorizontalOptions="End" />
-                            <Label Text="Volume : 12 cartes" 
-                                   TextColor="#8E8E93" 
-                                   FontSize="11" 
-                                   HorizontalOptions="End" />
-                        </VerticalStackLayout>
-                    </Grid>
-                </VerticalStackLayout>
-
-                <!-- BOUTONS DE SÉLECTION DE PÉRIODE (24h, 7j, 30j, 1an) -->
-                <Grid ColumnDefinitions="*, *, *, *" ColumnSpacing="8">
-                    <!-- Bouton Actif (24h) -->
-                    <Button Grid.Column="0" 
-                            Text="24h" 
-                            BackgroundColor="#F39C12" 
-                            TextColor="Black" 
-                            FontAttributes="Bold"
-                            CornerRadius="8" 
-                            HeightRequest="36" />
-                    <!-- Boutons Inactifs -->
-                    <Button Grid.Column="1" Text="7j" BackgroundColor="#1E1E1E" TextColor="#8E8E93" CornerRadius="8" HeightRequest="36" />
-                    <Button Grid.Column="2" Text="30j" BackgroundColor="#1E1E1E" TextColor="#8E8E93" CornerRadius="8" HeightRequest="36" />
-                    <Button Grid.Column="3" Text="1an" BackgroundColor="#1E1E1E" TextColor="#8E8E93" CornerRadius="8" HeightRequest="36" />
-                </Grid>
-
-                <!-- ZONE DU GRAPHIQUE (Border pour simuler le conteneur arrondi) -->
-                <Border BackgroundColor="#1A1A1A" 
-                        Stroke="#2C2C2E" 
-                        StrokeThickness="1" 
-                        StrokeShape="RoundRectangle 12" 
-                        HeightRequest="220" 
-                        Padding="12">
-                    <Grid>
-                        <!-- Remplacez ceci par votre composant de graphique (ex: Microcharts ou SkiaSharp) -->
-                        <Label Text="[ Zone Graphique ]" 
-                               TextColor="#555555" 
-                               HorizontalOptions="Center" 
-                               VerticalOptions="Center" />
-                    </Grid>
-                </Border>
-
-                <!-- SECTION HISTORIQUE DES ÉCHANGES -->
-                <VerticalStackLayout Spacing="12">
-                    <Label Text="Historique des échanges récents" 
-                           TextColor="White" 
-                           FontSize="15" 
-                           FontAttributes="Bold" />
-
-                    <!-- Liste d'éléments (Vous pourrez la lier à un CollectionView via le C#) -->
-                    <VerticalStackLayout Spacing="10">
-
-                        <!-- Élément 1 : Vente -->
-                        <Grid Padding="0, 8">
-                            <Label Text="Vendu par @William_A" TextColor="#CCCCCC" VerticalOptions="Center" />
-                            <Label Text="249,00 €" TextColor="White" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center" />
-                        </Grid>
-                        <BoxView HeightRequest="1" BackgroundColor="#222222" />
-
-                        <!-- Élément 2 : Achat -->
-                        <Grid Padding="0, 8">
-                            <Label Text="Acheté par @Chica_Fan" TextColor="#CCCCCC" VerticalOptions="Center" />
-                            <Label Text="210,00 €" TextColor="White" FontAttributes="Bold" HorizontalOptions="End" VerticalOptions="Center" />
-                        </Grid>
-                        <BoxView HeightRequest="1" BackgroundColor="#222222" />
-
-                    </VerticalStackLayout>
-                </VerticalStackLayout>
-
+                <Label
+                    x:Name="TxtCurrentPrice"
+                    Text="{Binding CurrentPrice,
+                                   StringFormat='{0:N2} €'}"
+                    FontSize="32"
+                    FontAttributes="Bold"
+                    TextColor="#FFAE19"/>
             </VerticalStackLayout>
-        </ScrollView>
 
-        <!-- 3. BARRE DE NAVIGATION INFÉRIEURE -->
-        <Border Grid.Row="2" 
-                BackgroundColor="#161618" 
-                Stroke="#222222" 
-                StrokeThickness="1" 
-                Padding="8, 6">
-            <Grid ColumnDefinitions="*, *, *, *">
-                <!-- Marché (Actif) -->
-                <VerticalStackLayout Grid.Column="0" HorizontalOptions="Center" Spacing="2">
-                    <Label Text="🛒" FontSize="18" HorizontalOptions="Center" />
-                    <Label Text="Marché" TextColor="#F39C12" FontSize="10" HorizontalOptions="Center" />
-                </VerticalStackLayout>
-                <!-- Collection -->
-                <VerticalStackLayout Grid.Column="1" HorizontalOptions="Center" Spacing="2">
-                    <Label Text="✖" FontSize="18" HorizontalOptions="Center" TextColor="#8E8E93" />
-                    <Label Text="Collection" TextColor="#8E8E93" FontSize="10" HorizontalOptions="Center" />
-                </VerticalStackLayout>
-                <!-- Alertes -->
-                <VerticalStackLayout Grid.Column="2" HorizontalOptions="Center" Spacing="2">
-                    <Label Text="🔔" FontSize="18" HorizontalOptions="Center" TextColor="#8E8E93" />
-                    <Label Text="Alertes" TextColor="#8E8E93" FontSize="10" HorizontalOptions="Center" />
-                </VerticalStackLayout>
-                <!-- Terminal -->
-                <VerticalStackLayout Grid.Column="3" HorizontalOptions="Center" Spacing="2">
-                    <Label Text=">_" FontSize="18" HorizontalOptions="Center" TextColor="#8E8E93" />
-                    <Label Text="Terminal" TextColor="#8E8E93" FontSize="10" HorizontalOptions="Center" />
-                </VerticalStackLayout>
+            <VerticalStackLayout
+                Grid.Column="1"
+                Spacing="4"
+                HorizontalOptions="End"
+                VerticalOptions="End">
+
+                <Label
+                    x:Name="TxtPriceChange"
+                    Text="{Binding PriceChangeText}"
+                    TextColor="{Binding PriceChangeColor}"
+                    FontSize="13"
+                    FontAttributes="Bold"
+                    HorizontalTextAlignment="End"/>
+
+                <HorizontalStackLayout
+                    Spacing="0"
+                    HorizontalOptions="End">
+
+                    <Label
+                        Text="Volume : "
+                        FontSize="13"
+                        TextColor="#73798C"/>
+
+                    <Label
+                        x:Name="TxtVolume"
+                        Text="{Binding VolumeText}"
+                        FontSize="13"
+                        TextColor="#A0A5B5"/>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+
+        <!-- 3. Filtres -->
+        <Grid
+            Grid.Row="2"
+            ColumnDefinitions="*,*,*,*"
+            Margin="0,0,0,16">
+
+            <Button
+                x:Name="BtnFilter24h"
+                Grid.Column="0"
+                Text="24h"
+                CommandParameter="24h"
+                Style="{StaticResource ActiveTimeFilterButtonStyle}"
+                Clicked="FilterButton_Clicked"/>
+
+            <Button
+                x:Name="BtnFilter7d"
+                Grid.Column="1"
+                Text="7j"
+                CommandParameter="7d"
+                Style="{StaticResource TimeFilterButtonStyle}"
+                Clicked="FilterButton_Clicked"/>
+
+            <Button
+                x:Name="BtnFilter30d"
+                Grid.Column="2"
+                Text="30j"
+                CommandParameter="30d"
+                Style="{StaticResource TimeFilterButtonStyle}"
+                Clicked="FilterButton_Clicked"/>
+
+            <Button
+                x:Name="BtnFilter1y"
+                Grid.Column="3"
+                Text="1an"
+                CommandParameter="1y"
+                Style="{StaticResource TimeFilterButtonStyle}"
+                Clicked="FilterButton_Clicked"/>
+        </Grid>
+
+        <!-- 4. Graphique -->
+        <Border
+            Grid.Row="3"
+            HeightRequest="180"
+            Margin="0,0,0,24"
+            Padding="12"
+            BackgroundColor="#181A1F"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 12">
+
+            <Grid RowDefinitions="*,Auto" RowSpacing="8">
+
+                <GraphicsView
+                    x:Name="PriceChart"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    InputTransparent="True"/>
+
+                <Grid
+                    Grid.Row="1"
+                    ColumnDefinitions="*,*,*,*,*">
+
+                    <Label
+                        x:Name="AxisLabel0"
+                        Grid.Column="0"
+                        FontSize="10"
+                        TextColor="#555A68"
+                        HorizontalTextAlignment="Start"/>
+
+                    <Label
+                        x:Name="AxisLabel1"
+                        Grid.Column="1"
+                        FontSize="10"
+                        TextColor="#555A68"
+                        HorizontalTextAlignment="Center"/>
+
+                    <Label
+                        x:Name="AxisLabel2"
+                        Grid.Column="2"
+                        FontSize="10"
+                        TextColor="#555A68"
+                        HorizontalTextAlignment="Center"/>
+
+                    <Label
+                        x:Name="AxisLabel3"
+                        Grid.Column="3"
+                        FontSize="10"
+                        TextColor="#555A68"
+                        HorizontalTextAlignment="Center"/>
+
+                    <Label
+                        x:Name="AxisLabel4"
+                        Grid.Column="4"
+                        FontSize="10"
+                        TextColor="#555A68"
+                        HorizontalTextAlignment="End"/>
+                </Grid>
             </Grid>
         </Border>
 
+        <!-- 5. Échanges récents -->
+        <Grid Grid.Row="4" RowDefinitions="Auto,*" RowSpacing="12">
+
+            <Label
+                Text="Historique des échanges récents"
+                FontSize="16"
+                FontAttributes="Bold"/>
+
+            <CollectionView
+                x:Name="TradeHistoryListView"
+                Grid.Row="1"
+                ItemsSource="{Binding RecentTrades}"
+                BackgroundColor="Transparent"
+                SelectionMode="None"
+                VerticalOptions="Fill"
+                VerticalScrollBarVisibility="Default">
+
+                <CollectionView.EmptyView>
+                    <Label
+                        Text="Aucun échange récent."
+                        TextColor="#73798C"
+                        Margin="0,16"/>
+                </CollectionView.EmptyView>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="local:TradeItem">
+
+                        <Grid
+                            Padding="0,8"
+                            ColumnDefinitions="*,Auto"
+                            ColumnSpacing="12">
+
+                            <Label
+                                FontSize="14"
+                                LineBreakMode="TailTruncation"
+                                VerticalOptions="Center">
+
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span
+                                            Text="{Binding TradeType}"
+                                            TextColor="#C5C9D3"/>
+                                        <Span
+                                            Text=" @"
+                                            TextColor="#C5C9D3"/>
+                                        <Span
+                                            Text="{Binding Username}"
+                                            TextColor="#FFFFFF"
+                                            FontAttributes="Bold"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding Amount,
+                                               StringFormat='{0:N2} €'}"
+                                TextColor="#FFFFFF"
+                                FontSize="14"
+                                FontAttributes="Bold"
+                                VerticalOptions="Center"
+                                HorizontalTextAlignment="End"/>
+                        </Grid>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <!-- 6. Navigation du bas -->
+        <Grid
+            Grid.Row="5"
+            RowDefinitions="1,Auto"
+            RowSpacing="0"
+            Margin="0,12,0,0">
+
+            <BoxView
+                HeightRequest="1"
+                Color="#1F2228"
+                HorizontalOptions="Fill"/>
+
+            <Grid
+                Grid.Row="1"
+                ColumnDefinitions="*,*,*,*"
+                Padding="0,12,0,4">
+
+                <VerticalStackLayout
+                    Grid.Column="0"
+                    Style="{StaticResource NavItemStyle}"
+                    SemanticProperties.Description="Marché">
+
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="NavItem_Tapped"
+                            CommandParameter="Market"/>
+                    </VerticalStackLayout.GestureRecognizers>
+
+                    <Label
+                        x:Name="MarketIcon"
+                        Text="🛍"
+                        Style="{StaticResource NavIconStyle}"
+                        TextColor="#FFAE19"/>
+
+                    <Label
+                        x:Name="MarketText"
+                        Text="Marché"
+                        Style="{StaticResource NavTextStyle}"
+                        TextColor="#FFAE19"
+                        FontAttributes="Bold"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                    Grid.Column="1"
+                    Style="{StaticResource NavItemStyle}"
+                    SemanticProperties.Description="Collection">
+
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="NavItem_Tapped"
+                            CommandParameter="Collection"/>
+                    </VerticalStackLayout.GestureRecognizers>
+
+                    <Label
+                        x:Name="CollectionIcon"
+                        Text="✖"
+                        Style="{StaticResource NavIconStyle}"/>
+
+                    <Label
+                        x:Name="CollectionText"
+                        Text="Collection"
+                        Style="{StaticResource NavTextStyle}"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                    Grid.Column="2"
+                    Style="{StaticResource NavItemStyle}"
+                    SemanticProperties.Description="Alertes">
+
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="NavItem_Tapped"
+                            CommandParameter="Alerts"/>
+                    </VerticalStackLayout.GestureRecognizers>
+
+                    <Label
+                        x:Name="AlertsIcon"
+                        Text="🔔"
+                        Style="{StaticResource NavIconStyle}"/>
+
+                    <Label
+                        x:Name="AlertsText"
+                        Text="Alertes"
+                        Style="{StaticResource NavTextStyle}"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout
+                    Grid.Column="3"
+                    Style="{StaticResource NavItemStyle}"
+                    SemanticProperties.Description="Terminal">
+
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="NavItem_Tapped"
+                            CommandParameter="Terminal"/>
+                    </VerticalStackLayout.GestureRecognizers>
+
+                    <Label
+                        x:Name="TerminalIcon"
+                        Text="&gt;_"
+                        Style="{StaticResource NavIconStyle}"/>
+
+                    <Label
+                        x:Name="TerminalText"
+                        Text="Terminal"
+                        Style="{StaticResource NavTextStyle}"/>
+                </VerticalStackLayout>
+            </Grid>
+        </Grid>
     </Grid>
 </ContentPage>

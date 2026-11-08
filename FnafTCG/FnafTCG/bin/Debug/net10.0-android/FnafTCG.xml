@@ -61,6 +61,7 @@
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
+            <inheritdoc/>
         </member>
         <member name="P:FnafTCG.VuesModeles.OffreVueModele.OffreCourante">
             <inheritdoc cref="F:FnafTCG.VuesModeles.OffreVueModele.offreCourante"/>
@@ -79,6 +80,12 @@
         </member>
         <member name="P:FnafTCG.VuesModeles.OffreVueModele.ChargerOffreCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FnafTCG.VuesModeles.OffreVueModele.ChargerOffreAsync"/>.</summary>
+        </member>
+        <member name="F:FnafTCG.VuesModeles.OffreVueModele.chargerQuotesCommand">
+            <summary>The backing field for <see cref="P:FnafTCG.VuesModeles.OffreVueModele.ChargerQuotesCommand"/>.</summary>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.OffreVueModele.ChargerQuotesCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:FnafTCG.VuesModeles.OffreVueModele.ChargerQuotes"/>.</summary>
         </member>
         <member name="F:FnafTCG.VuesModeles.OffreVueModele.creerOffreCommand">
             <summary>The backing field for <see cref="P:FnafTCG.VuesModeles.OffreVueModele.CreerOffreCommand"/>.</summary>
