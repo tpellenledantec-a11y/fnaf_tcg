@@ -1,0 +1,41 @@
+# Visual Studio / IDE files
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.lock.*
+
+# .NET / MAUI Build & Restore directories
+[Bb]in/
+[Oo]bj/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Publish output
+[Ee]xternal/
+[Pp]ublish/
+*.[Pp]ublish.xml
+
+# Diagnostic files
+*.aps
+*.ncb
+*.opensdf
+*.sdf
+*.cache
+*.opendb
+
+# VS Code / Rider (Optional IDE folders)
+.vscode/
+.idea/
+
+# OS-specific generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
