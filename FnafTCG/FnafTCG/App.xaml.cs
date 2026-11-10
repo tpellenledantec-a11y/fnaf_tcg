@@ -1,18 +1,21 @@
 ﻿using FnafTCG.Vues;
-using Microsoft.Extensions.DependencyInjection;
 
-namespace FnafTCG
+namespace FnafTCG;
+
+public partial class App : Application
 {
-    public partial class App : Application
+    public App()
     {
-        public App()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+    }
 
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new NavigationPage(new ConnexionPage()));
-        }
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        ConnexionPage connexionPage = new ConnexionPage();
+
+        NavigationPage navigationPage =
+            new NavigationPage(connexionPage);
+
+        return new Window(navigationPage);
     }
 }

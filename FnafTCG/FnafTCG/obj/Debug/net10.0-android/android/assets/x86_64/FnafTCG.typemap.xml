@@ -1,4 +1,4 @@
-<api type="debug" assembly-name="FnafTCG" mvid="520786fa9b9340f2be82272d4ebfe945">
+<api type="debug" assembly-name="FnafTCG" mvid="074e1c7dc94e4a878b86e2906a761d04">
   <java-to-managed>
     <entry java-name="crc64c0eac244597962c4/MainActivity" managed-name="FnafTCG.MainActivity, FnafTCG" managed-type-token-id="33554444" />
     <entry java-name="crc64c0eac244597962c4/MainApplication" managed-name="FnafTCG.MainApplication, FnafTCG" managed-type-token-id="33554445" />

@@ -9,6 +9,7 @@ public partial class ConnexionPage : ContentPage
     public ConnexionPage()
     {
         InitializeComponent();
+        NavigationPage.SetHasNavigationBar(this, false);
         BindingContext = new ConnexionVueModele();
     }
 
