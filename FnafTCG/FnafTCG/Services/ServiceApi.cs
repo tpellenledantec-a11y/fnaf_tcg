@@ -1,45 +1,89 @@
-using System.Collections.ObjectModel;
+using Android.Media.TV;
+using FnafTCG.Modeles;
+using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
-using Newtonsoft.Json;
-using FnafTCG.Modeles;
 
 namespace FnafTCG.Services;
 
 public class ServiceApi
 {
-    #region Attributs
+    #region Attributs & Singleton
 
-    private static ServiceApi instance = new ServiceApi();
-    private HttpClient client;
+    private static readonly ServiceApi _instance = new ServiceApi();
+    private readonly HttpClient _client;
 
-    #endregion
-
-    #region Constructeurs
+    public static ServiceApi Instance => _instance;
 
     private ServiceApi()
     {
-        client = new HttpClient();
-        client.BaseAddress = new Uri(
-            "https://api-cartes-g3.fldsio.com/");
-        client.Timeout = TimeSpan.FromSeconds(15);
+        _client = new HttpClient
+        {
+            BaseAddress = new Uri("https://api-cartes-g3.fldsio.com/"),
+            Timeout = TimeSpan.FromSeconds(15)
+        };
     }
 
     #endregion
 
-    #region Getter/Setter
+    #region Configuration
 
-    public static ServiceApi Instance
+    public void SetAuthToken(string token)
     {
-        get { return instance; }
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
     }
 
     #endregion
 
-    #region Methodes
+    #region Méthodes HTTP Générales (Génériques)
 
-    private async Task<string> LireReponseAsync(
-        HttpResponseMessage reponse)
+    // GET Générique
+    protected async Task<T?> GetAsync<T>(string endpoint)
+    {
+        using HttpResponseMessage response = await _client.GetAsync(endpoint);
+        string json = await ReadResponseOrThrowAsync(response);
+        return JsonConvert.DeserializeObject<T>(json);
+    }
+
+    // POST Générique
+    protected async Task<TResponse?> PostAsync<TRequest, TResponse>(string endpoint, TRequest data)
+    {
+        string jsonBody = JsonConvert.SerializeObject(data);
+        using StringContent content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+
+        using HttpResponseMessage response = await _client.PostAsync(endpoint, content);
+        string json = await ReadResponseOrThrowAsync(response);
+        return JsonConvert.DeserializeObject<TResponse>(json);
+    }
+
+    // PATCH Générique
+    protected async Task<TResponse?> PatchAsync<TRequest, TResponse>(string endpoint, TRequest data)
+    {
+        string jsonBody = JsonConvert.SerializeObject(data);
+        using StringContent content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+
+        using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Patch, endpoint)
+        {
+            Content = content
+        };
+
+        using HttpResponseMessage response = await _client.SendAsync(request);
+        string json = await ReadResponseOrThrowAsync(response);
+        return JsonConvert.DeserializeObject<TResponse>(json);
+    }
+
+    // DELETE Générique
+    protected async Task DeleteAsync(string endpoint)
+    {
+        using HttpResponseMessage response = await _client.DeleteAsync(endpoint);
+        await ReadResponseOrThrowAsync(response);
+    }
+
+    #endregion
+
+    #region Gestion centralisée des erreurs
+
+    private async Task<string> ReadResponseOrThrowAsync(HttpResponseMessage reponse)
     {
         string json = await reponse.Content.ReadAsStringAsync();
 
@@ -48,142 +92,69 @@ public class ServiceApi
             ErreurApi? erreur = null;
             try
             {
-                erreur = JsonConvert
-                    .DeserializeObject<ErreurApi>(json);
+                erreur = JsonConvert.DeserializeObject<ErreurApi>(json);
             }
             catch (JsonException)
             {
-                // Le serveur peut renvoyer une réponse non JSON.
+                // Le serveur peut renvoyer une réponse non JSON
             }
 
-            if (reponse.StatusCode ==
-                System.Net.HttpStatusCode.Unauthorized)
-                throw new Exception(
-                    "Connexion refusée ou expirée. Reconnectez-vous.");
+            if (reponse.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                throw new Exception("Connexion refusée ou expirée. Reconnectez-vous.");
 
-            throw new Exception(erreur?.Message ??
-                "Le serveur ne peut pas traiter la demande.");
+            throw new Exception(erreur?.Message ?? "Le serveur ne peut pas traiter la demande.");
         }
 
         return json;
     }
 
-    public async Task SeConnecterAsync(
-        string identifiant, string motDePasse)
+    #endregion
+
+    #region Méthodes Métiers (Utilisent les méthodes génériques)
+
+    public async Task<ReponseConnexion?> SeConnecterAsync(string identifiant, string motDePasse)
     {
-        DemandeConnexion demande = new DemandeConnexion
+        var demande = new DemandeConnexion
         {
             Identifiant = identifiant,
             MotDePasse = motDePasse
         };
-        string json = JsonConvert.SerializeObject(demande);
-        using StringContent contenu = new StringContent(
-            json, Encoding.UTF8, "application/json");
-        using HttpResponseMessage reponse =
-            await client.PostAsync("auth/login", contenu);
-        string resultat = await LireReponseAsync(reponse);
-        ReponseConnexion? connexion = JsonConvert
-            .DeserializeObject<ReponseConnexion>(resultat);
 
-        if (connexion == null ||
-            string.IsNullOrWhiteSpace(connexion.JetonAcces))
-            throw new Exception("Le jeton est absent.");
+        var resultat = await PostAsync<DemandeConnexion, ReponseConnexion>("auth/login", demande);
 
-        client.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue(
-                "Bearer", connexion.JetonAcces);
-    }
-
-    public async Task<ObservableCollection<CartePossedee>>
-        RecupererCartesPossedeesAsync()
-    {
-        using HttpResponseMessage reponse =
-            await client.GetAsync("portfolio");
-        string json = await LireReponseAsync(reponse);
-        Portefeuille? portefeuille = JsonConvert
-            .DeserializeObject<Portefeuille>(json);
-
-        if (portefeuille == null)
-            throw new Exception("Le portefeuille est absent.");
-
-        return portefeuille.CartesPossedees;
-    }
-
-    public async Task<Offre?> RecupererOffreAsync(
-        CartePossedee cartePossedee)
-    {
-        string adresse = "cards/" +
-            cartePossedee.Carte.Identifiant + "/offers";
-        using HttpResponseMessage reponse =
-            await client.GetAsync(adresse);
-        string json = await LireReponseAsync(reponse);
-        ReponseOffres? resultat = JsonConvert
-            .DeserializeObject<ReponseOffres>(json);
-
-        if (resultat == null)
-            throw new Exception("Les offres sont absentes.");
-
-        foreach (Offre offre in resultat.Offres)
+        if (resultat != null && !string.IsNullOrWhiteSpace(resultat.JetonAcces))
         {
-            if (offre.IdentifiantExemplaire ==
-                cartePossedee.Identifiant)
-                return offre;
+            SetAuthToken(resultat.JetonAcces);
         }
 
-        return null;
+        return resultat;
     }
 
-    public async Task<Offre> CreerOffreAsync(
-        string identifiantExemplaire, decimal prix)
+    public async Task<Portefeuille?> RecupererPortefeuilleAsync()
     {
-        DemandeCreationOffre demande = new DemandeCreationOffre
+        return await GetAsync<Portefeuille>("portfolio");
+    }
+
+    public async Task<Offre?> CreerOffreAsync(string identifiantExemplaire, decimal prix)
+    {
+        var demande = new DemandeCreationOffre
         {
             IdentifiantExemplaire = identifiantExemplaire,
             Prix = prix
         };
-        string json = JsonConvert.SerializeObject(demande);
-        using StringContent contenu = new StringContent(
-            json, Encoding.UTF8, "application/json");
-        using HttpResponseMessage reponse =
-            await client.PostAsync("offers", contenu);
-        string resultat = await LireReponseAsync(reponse);
-        Offre? offre = JsonConvert
-            .DeserializeObject<Offre>(resultat);
 
-        if (offre == null)
-            throw new Exception("L'offre créée est absente.");
-
-        return offre;
+        return await PostAsync<DemandeCreationOffre, Offre>("offers", demande);
     }
 
-    public async Task<Offre> ModifierOffreAsync(
-        string identifiantOffre, decimal prix)
+    public async Task<Offre?> ModifierOffreAsync(string identifiantOffre, decimal prix)
     {
-        DemandeModificationOffre demande =
-            new DemandeModificationOffre { Prix = prix };
-        string json = JsonConvert.SerializeObject(demande);
-        using StringContent contenu = new StringContent(
-            json, Encoding.UTF8, "application/json");
-        using HttpRequestMessage requete = new HttpRequestMessage(
-            HttpMethod.Patch, "offers/" + identifiantOffre);
-        requete.Content = contenu;
-        using HttpResponseMessage reponse =
-            await client.SendAsync(requete);
-        string resultat = await LireReponseAsync(reponse);
-        Offre? offre = JsonConvert
-            .DeserializeObject<Offre>(resultat);
-
-        if (offre == null)
-            throw new Exception("L'offre modifiée est absente.");
-
-        return offre;
+        var demande = new DemandeModificationOffre { Prix = prix };
+        return await PatchAsync<DemandeModificationOffre, Offre>($"offers/{identifiantOffre}", demande);
     }
 
     public async Task SupprimerOffreAsync(string identifiantOffre)
     {
-        using HttpResponseMessage reponse =
-            await client.DeleteAsync("offers/" + identifiantOffre);
-        await LireReponseAsync(reponse);
+        await DeleteAsync($"offers/{identifiantOffre}");
     }
 
     #endregion

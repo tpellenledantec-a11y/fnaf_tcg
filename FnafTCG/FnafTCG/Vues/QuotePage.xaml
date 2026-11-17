@@ -5,7 +5,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:FnafTCG.Vues"
-    x:DataType="local:QuotePage"
+    xmlns:vm="clr-namespace:FnafTCG.VuesModeles"
+    x:DataType="vm:QuotesVueModele"
     Title="Historique du cours"
     BackgroundColor="#121316"
     NavigationPage.HasNavigationBar="False"
@@ -155,7 +156,7 @@
 
                 <Label
                     x:Name="TxtCurrentPrice"
-                    Text="{Binding CurrentPrice,
+                    Text="{Binding CartePossedee.Quote.Price,
                                    StringFormat='{0:N2} €'}"
                     FontSize="32"
                     FontAttributes="Bold"

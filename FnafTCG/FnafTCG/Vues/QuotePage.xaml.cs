@@ -1,18 +1,31 @@
+using FnafTCG.Modeles;
 using FnafTCG.VuesModeles;
 
 namespace FnafTCG.Vues;
 
 public partial class QuotePage : ContentPage
 {
-	public QuotePage()
-	{
-		InitializeComponent();
-        BindingContext = new OffreVueModele();
-
-    }
-    private async void OnBackButtonClicked(object sender, EventArgs e)
+    // Now requires the selected card to be passed when opening this page
+    public QuotePage(CartePossedee cartePossedee)
     {
-        // Le chemin ".." indique au Shell de remonter d'un niveau dans la pile de navigation
-        await Shell.Current.GoToAsync("..");
+        InitializeComponent();
+        BindingContext = new QuotesVueModele(cartePossedee);
+    }
+
+    private void FilterButton_Clicked(object sender, EventArgs e)
+    {
+        // Reset all filter buttons to default style
+        BtnFilter24h.Style = (Style)Resources["TimeFilterButtonStyle"];
+        BtnFilter7d.Style = (Style)Resources["TimeFilterButtonStyle"];
+        BtnFilter30d.Style = (Style)Resources["TimeFilterButtonStyle"];
+        BtnFilter1y.Style = (Style)Resources["TimeFilterButtonStyle"];
+
+        // Set the clicked button to active style
+        if (sender is Button clickedButton)
+        {
+            clickedButton.Style = (Style)Resources["ActiveTimeFilterButtonStyle"];
+
+            // TODO: Call your API here based on which button was clicked if needed
+        }
     }
 }
