@@ -4,7 +4,7 @@
     x:Class="FnafTCG.Vues.QuotePage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:FnafTCG.Vues"
+    xmlns:modeles="clr-namespace:FnafTCG.Modeles"
     xmlns:vm="clr-namespace:FnafTCG.VuesModeles"
     x:DataType="vm:QuotesVueModele"
     Title="Historique du cours"
@@ -115,7 +115,7 @@
 
     <Grid
         Padding="16,16,16,8"
-        RowDefinitions="Auto,Auto,Auto,Auto,*,Auto">
+        RowDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto">
 
         <!-- 1. En-tête -->
         <Grid
@@ -149,15 +149,14 @@
             <VerticalStackLayout Spacing="6">
 
                 <Label
-                    Text="COURANT  TEMPS  RÉEL"
+                    Text="COTATION DU MARCHÉ"
                     FontSize="11"
                     FontAttributes="Bold"
                     TextColor="#73798C"/>
 
                 <Label
                     x:Name="TxtCurrentPrice"
-                    Text="{Binding CartePossedee.Quote.Price,
-                                   StringFormat='{0:N2} €'}"
+                    Text="{Binding CurrentPriceText}"
                     FontSize="32"
                     FontAttributes="Bold"
                     TextColor="#FFAE19"/>
@@ -182,13 +181,13 @@
                     HorizontalOptions="End">
 
                     <Label
-                        Text="Volume : "
+                        Text=""
                         FontSize="13"
                         TextColor="#73798C"/>
 
                     <Label
                         x:Name="TxtVolume"
-                        Text="{Binding VolumeText}"
+                        Text="{Binding UpdatedAtText}"
                         FontSize="13"
                         TextColor="#A0A5B5"/>
                 </HorizontalStackLayout>
@@ -294,18 +293,29 @@
             </Grid>
         </Border>
 
-        <!-- 5. Échanges récents -->
-        <Grid Grid.Row="4" RowDefinitions="Auto,*" RowSpacing="12">
+        <VerticalStackLayout Grid.Row="4" Spacing="6" Margin="0,0,0,12">
+            <Button Text="Actualiser le cours"
+                    Command="{Binding ChargerQuotesCommand}"
+                    IsEnabled="{Binding EstDisponible}" />
+            <ActivityIndicator IsRunning="{Binding EstOccupe}"
+                               IsVisible="{Binding EstOccupe}" />
+            <Label Text="{Binding Message}" TextColor="#F87171" />
+            <Label Text="Actualisation toutes les 10 s. L'API conserve les 120 dernières cotations (environ 20 min). Le prix de vente d'une offre est indépendant du cours."
+                   FontSize="11" TextColor="#9EA3B0" />
+        </VerticalStackLayout>
+
+        <!-- 5. Historique des cotations -->
+        <Grid Grid.Row="5" RowDefinitions="Auto,*" RowSpacing="12">
 
             <Label
-                Text="Historique des échanges récents"
+                Text="Historique des cotations"
                 FontSize="16"
                 FontAttributes="Bold"/>
 
             <CollectionView
                 x:Name="TradeHistoryListView"
                 Grid.Row="1"
-                ItemsSource="{Binding RecentTrades}"
+                ItemsSource="{Binding Quotes}"
                 BackgroundColor="Transparent"
                 SelectionMode="None"
                 VerticalOptions="Fill"
@@ -313,13 +323,13 @@
 
                 <CollectionView.EmptyView>
                     <Label
-                        Text="Aucun échange récent."
+                        Text="Aucune cotation disponible."
                         TextColor="#73798C"
                         Margin="0,16"/>
                 </CollectionView.EmptyView>
 
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="local:TradeItem">
+                    <DataTemplate x:DataType="modeles:Quote">
 
                         <Grid
                             Padding="0,8"
@@ -327,30 +337,13 @@
                             ColumnSpacing="12">
 
                             <Label
+                                Text="{Binding TimestampText}"
                                 FontSize="14"
-                                LineBreakMode="TailTruncation"
-                                VerticalOptions="Center">
-
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span
-                                            Text="{Binding TradeType}"
-                                            TextColor="#C5C9D3"/>
-                                        <Span
-                                            Text=" @"
-                                            TextColor="#C5C9D3"/>
-                                        <Span
-                                            Text="{Binding Username}"
-                                            TextColor="#FFFFFF"
-                                            FontAttributes="Bold"/>
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
+                                VerticalOptions="Center" />
 
                             <Label
                                 Grid.Column="1"
-                                Text="{Binding Amount,
-                                               StringFormat='{0:N2} €'}"
+                                Text="{Binding PriceText}"
                                 TextColor="#FFFFFF"
                                 FontSize="14"
                                 FontAttributes="Bold"
@@ -365,7 +358,7 @@
 
         <!-- 6. Navigation du bas -->
         <Grid
-            Grid.Row="5"
+            Grid.Row="6"
             RowDefinitions="1,Auto"
             RowSpacing="0"
             Margin="0,12,0,0">

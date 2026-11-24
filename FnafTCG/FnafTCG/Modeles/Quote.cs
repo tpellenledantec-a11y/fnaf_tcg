@@ -1,25 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+using System.Globalization;
 
-namespace FnafTCG.Modeles
+namespace FnafTCG.Modeles;
+
+public class Quote
 {
-    public class Quote
-    {
-        [JsonPropertyName("price")]
-        public decimal Price { get; set; }
+    [JsonProperty("price")]
+    public decimal Price { get; set; }
 
-        [JsonPropertyName("change")]
-        public decimal Change { get; set; }
+    [JsonProperty("change")]
+    public decimal Change { get; set; }
 
-        [JsonPropertyName("currency")]
-        public string Currency { get; set; }
+    [JsonProperty("currency")]
+    public string Currency { get; set; } = "CRD";
 
-        [JsonPropertyName("timestamp")]
-        public string Timestamp { get; set; }
+    [JsonProperty("timestamp")]
+    public DateTimeOffset Timestamp { get; set; }
 
-        [JsonPropertyName("version")]
-        public int Version { get; set; }
-    }
+    [JsonProperty("version")]
+    public long Version { get; set; }
+
+    public string PriceText => $"{Price:N2} {Currency}";
+    public string TimestampText => Timestamp.ToLocalTime().ToString(
+        "dd/MM HH:mm:ss", CultureInfo.CurrentCulture);
 }

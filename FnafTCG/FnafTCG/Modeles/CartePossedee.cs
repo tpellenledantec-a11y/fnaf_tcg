@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using System.Text.Json.Serialization;
 
 namespace FnafTCG.Modeles;
 
@@ -39,9 +38,6 @@ public class CartePossedee
         get { return valeurActuelle; }
         set { valeurActuelle = value; }
     }
-
-    [JsonProperty("quote")] 
-    public Quote Quote { get; set; }
 
     #endregion
 

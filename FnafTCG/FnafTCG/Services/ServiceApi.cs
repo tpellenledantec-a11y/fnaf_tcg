@@ -1,4 +1,4 @@
-using Android.Media.TV;
+using System.Collections.ObjectModel;
 using FnafTCG.Modeles;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
@@ -15,13 +15,15 @@ public class ServiceApi
 
     public static ServiceApi Instance => _instance;
 
-    private ServiceApi()
+    private ServiceApi() : this(new HttpClient())
     {
-        _client = new HttpClient
-        {
-            BaseAddress = new Uri("https://api-cartes-g3.fldsio.com/"),
-            Timeout = TimeSpan.FromSeconds(15)
-        };
+    }
+
+    internal ServiceApi(HttpClient client)
+    {
+        _client = client;
+        _client.BaseAddress ??= new Uri("https://api-cartes-g3.fldsio.com/");
+        _client.Timeout = TimeSpan.FromSeconds(15);
     }
 
     #endregion
@@ -122,17 +124,42 @@ public class ServiceApi
 
         var resultat = await PostAsync<DemandeConnexion, ReponseConnexion>("auth/login", demande);
 
-        if (resultat != null && !string.IsNullOrWhiteSpace(resultat.JetonAcces))
-        {
-            SetAuthToken(resultat.JetonAcces);
-        }
+        if (resultat == null || string.IsNullOrWhiteSpace(resultat.JetonAcces))
+            throw new Exception("Le jeton est absent.");
 
+        SetAuthToken(resultat.JetonAcces);
         return resultat;
     }
 
     public async Task<Portefeuille?> RecupererPortefeuilleAsync()
     {
         return await GetAsync<Portefeuille>("portfolio");
+    }
+
+    public async Task<ObservableCollection<CartePossedee>> RecupererCartesPossedeesAsync()
+    {
+        Portefeuille? portefeuille = await RecupererPortefeuilleAsync();
+        return portefeuille?.CartesPossedees ??
+            throw new Exception("Le portefeuille est absent.");
+    }
+
+    public async Task<Offre?> RecupererOffreAsync(CartePossedee cartePossedee)
+    {
+        ReponseOffres? reponse = await GetAsync<ReponseOffres>(
+            $"cards/{cartePossedee.Carte.Identifiant}/offers");
+        if (reponse == null)
+            throw new Exception("Les offres sont absentes.");
+
+        return reponse.Offres.FirstOrDefault(offre =>
+            offre.IdentifiantExemplaire == cartePossedee.Identifiant);
+    }
+
+    public async Task<IReadOnlyList<Quote>> RecupererQuotesAsync(string identifiantCarte)
+    {
+        // Le portefeuille ne contient pas de quote : charger l'historique de la carte.
+        ReponseQuotes? reponse = await GetAsync<ReponseQuotes>(
+            $"cards/{identifiantCarte}/quotes?limit=120");
+        return reponse?.Items ?? throw new Exception("Les cotations sont absentes.");
     }
 
     public async Task<Offre?> CreerOffreAsync(string identifiantExemplaire, decimal prix)

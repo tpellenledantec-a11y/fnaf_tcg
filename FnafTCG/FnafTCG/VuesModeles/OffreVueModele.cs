@@ -107,7 +107,7 @@ public partial class OffreVueModele : ObservableObject
         {
             await Application.Current!.Windows[0].Page!
                 .Navigation.PushAsync(
-                    new QuotePage());
+                    new QuotePage(CartePossedee));
         }
         catch (Exception erreur)
         {
