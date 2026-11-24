@@ -3,12 +3,27 @@
     x:Class="FnafTCG.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:FnafTCG"
-    Title="FnafTCG">
+    xmlns:vues="clr-namespace:FnafTCG.Vues"
+    Shell.BackgroundColor="#0F0F12"
+    Shell.TabBarBackgroundColor="#111115"
+    Shell.TabBarForegroundColor="#F59E0B"
+    Shell.TabBarTitleColor="#F59E0B"
+    Shell.TabBarUnselectedColor="#8A8A93">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent Route="Marche" Title="Marché"
+                      ContentTemplate="{DataTemplate vues:CatalogueVisiteurPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="🛍" Size="20" />
+            </ShellContent.Icon>
+        </ShellContent>
 
+        <ShellContent Route="Collection" Title="Collection"
+                      ContentTemplate="{DataTemplate vues:CartesPage}">
+            <ShellContent.Icon>
+                <FontImageSource Glyph="🗂" Size="20" />
+            </ShellContent.Icon>
+        </ShellContent>
+        
+    </TabBar>
 </Shell>

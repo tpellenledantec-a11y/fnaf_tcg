@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:FnafTCG.VuesModeles"
+    xmlns:modeles="clr-namespace:FnafTCG.Modeles"
+    x:Class="FnafTCG.Vues.CatalogueVisiteurPage"
+    x:DataType="vm:CartesVueModele"
+    BackgroundColor="#0F0F12"
+    Title="Marché">
+
+    <ContentPage.Resources>
+        <Color x:Key="Fond">#111115</Color>
+        <Color x:Key="Bordure">#2A2A30</Color>
+        <Color x:Key="Orange">#F59E0B</Color>
+        <Color x:Key="Gris">#8A8A93</Color>
+        <Color x:Key="Vert">#10B981</Color>
+        <Color x:Key="Rouge">#EF4444</Color>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto,*,Auto" RowSpacing="12" Padding="16">
+
+        <!-- En-tête -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+            <VerticalStackLayout>
+                <Label Text="FazMarket - Visiteur" FontSize="20"
+                       FontAttributes="Bold" TextColor="White" />
+                <Label Text="Base de données dégradée" FontSize="11"
+                       TextColor="{StaticResource Gris}" />
+            </VerticalStackLayout>
+            <Border Grid.Column="1" VerticalOptions="Start" Padding="6,2"
+                    Stroke="{StaticResource Vert}" StrokeShape="RoundRectangle 4"
+                    BackgroundColor="Transparent">
+                <Label Text="INVITÉ" FontSize="10"
+                       TextColor="{StaticResource Vert}" />
+            </Border>
+        </Grid>
+
+        <!-- Catalogue -->
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Catalogue}">
+            <CollectionView.Header>
+                <Label Text="Animatronics disponibles (Visiteur)" FontSize="16"
+                       FontAttributes="Bold" TextColor="White" Margin="0,0,0,12" />
+            </CollectionView.Header>
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2"
+                                 HorizontalItemSpacing="12" VerticalItemSpacing="12" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="modeles:Carte">
+                    <Border BackgroundColor="{StaticResource Fond}"
+                            Stroke="{StaticResource Bordure}"
+                            StrokeShape="RoundRectangle 12" Padding="0">
+                        <VerticalStackLayout Spacing="6">
+                            <Image Source="{Binding Image}" HeightRequest="110"
+                                   Aspect="AspectFill" />
+                            <Grid ColumnDefinitions="*,Auto" Padding="10,0">
+                                <Label FontSize="11" TextColor="{StaticResource Orange}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="#" />
+                                            <Span Text="{Binding Identifiant}" />
+                                            <Span Text=" • " />
+                                            <Span Text="{Binding Rarete}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label Grid.Column="1" FontSize="11" TextColor="White"
+                                       Text="{Binding Prix, StringFormat='{0:F2} €'}" />
+                            </Grid>
+                            <Label Text="{Binding Modele}" FontAttributes="Bold"
+                                   TextColor="White" Padding="10,0" />
+                            <Button Text="🔑 Connexion requise" IsEnabled="False"
+                                    FontSize="11" Margin="10,0,10,10"
+                                    BackgroundColor="#1E1E24"
+                                    TextColor="{StaticResource Gris}" />
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Pagination -->
+        <Grid Grid.Row="2" ColumnDefinitions="*,Auto">
+            <Label Text="Résultats 1-2 sur 84" FontSize="11"
+                   TextColor="{StaticResource Gris}" VerticalOptions="Center" />
+            <Button Grid.Column="1" Text="Suivant &gt;" FontSize="12"
+                    TextColor="White" BackgroundColor="#1E1E24"
+                    BorderColor="{StaticResource Bordure}" BorderWidth="1"
+                    CornerRadius="6" />
+        </Grid>
+    </Grid>
+</ContentPage>

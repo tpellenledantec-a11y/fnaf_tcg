@@ -3,25 +3,25 @@
   "WorkspaceRootPath": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\utilisateur\\source\\repos\\fnaftcg\\fnaftcg\\services\\serviceapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|solutionrelative:fnaftcg\\services\\serviceapi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\utilisateur\\source\\repos\\fnaftcg\\fnaftcg\\modeles\\carte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|solutionrelative:fnaftcg\\modeles\\carte.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\utilisateur\\source\\repos\\fnaftcg\\fnaftcg\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|solutionrelative:fnaftcg\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\utilisateur\\source\\repos\\fnaftcg\\fnaftcg\\vues\\offrepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|solutionrelative:fnaftcg\\vues\\offrepage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\utilisateur\\source\\repos\\fnaftcg\\fnaftcg\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|solutionrelative:fnaftcg\\appshell.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|c:\\users\\utilisateur\\source\\repos\\fnaftcg\\fnaftcg\\vues\\offrepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A948E204-7AE0-0B0C-F0CF-2FB0FE3B532A}|FnafTCG\\FnafTCG.csproj|solutionrelative:fnaftcg\\vues\\offrepage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 0,
+      "Orientation": 1,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
+          "DockedHeight": 253,
           "SelectedChildIndex": 1,
           "Children": [
             {
@@ -31,41 +31,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ServiceApi.cs",
-              "DocumentMoniker": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\Services\\ServiceApi.cs",
-              "RelativeDocumentMoniker": "FnafTCG\\Services\\ServiceApi.cs",
-              "ToolTip": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\Services\\ServiceApi.cs",
-              "RelativeToolTip": "FnafTCG\\Services\\ServiceApi.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBcAAAAiAAAAAAAAAA==",
+              "Title": "Carte.cs",
+              "DocumentMoniker": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\Modeles\\Carte.cs",
+              "RelativeDocumentMoniker": "FnafTCG\\Modeles\\Carte.cs",
+              "ToolTip": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\Modeles\\Carte.cs",
+              "RelativeToolTip": "FnafTCG\\Modeles\\Carte.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwBAAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-29T12:06:14.562Z",
+              "WhenOpened": "2026-11-24T13:22:01.138Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\App.xaml.cs",
-              "RelativeDocumentMoniker": "FnafTCG\\App.xaml.cs",
-              "ToolTip": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\App.xaml.cs",
-              "RelativeToolTip": "FnafTCG\\App.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAA==",
+              "Title": "OffrePage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\Vues\\OffrePage.xaml.cs",
+              "RelativeDocumentMoniker": "FnafTCG\\Vues\\OffrePage.xaml.cs",
+              "ToolTip": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\Vues\\OffrePage.xaml.cs",
+              "RelativeToolTip": "FnafTCG\\Vues\\OffrePage.xaml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-09-29T12:04:47.66Z",
+              "WhenOpened": "2026-11-17T12:51:12.946Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "AppShell.xaml",
-              "DocumentMoniker": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\AppShell.xaml",
-              "RelativeDocumentMoniker": "FnafTCG\\AppShell.xaml",
-              "ToolTip": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\AppShell.xaml",
-              "RelativeToolTip": "FnafTCG\\AppShell.xaml",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Title": "OffrePage.xaml",
+              "DocumentMoniker": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\Vues\\OffrePage.xaml",
+              "RelativeDocumentMoniker": "FnafTCG\\Vues\\OffrePage.xaml",
+              "ToolTip": "C:\\Users\\utilisateur\\source\\repos\\FnafTCG\\FnafTCG\\Vues\\OffrePage.xaml",
+              "RelativeToolTip": "FnafTCG\\Vues\\OffrePage.xaml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2026-09-29T12:04:33.855Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-17T12:51:09.208Z"
             }
           ]
         }

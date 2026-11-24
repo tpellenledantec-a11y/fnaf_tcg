@@ -2,35 +2,192 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:vm="clr-namespace:FnafTCG.VuesModeles"
     x:Class="FnafTCG.Vues.OffrePage"
-    x:DataType="vm:OffreVueModele"
-    Title="Mon offre">
-    <ScrollView>
-        <VerticalStackLayout Padding="24" Spacing="12">
-            <Label Text="{Binding CartePossedee.Carte.Marque}"
-                   FontSize="22" FontAttributes="Bold" />
-            <Label Text="{Binding CartePossedee.Carte.Modele}" />
-            <Label Text="{Binding OffreCourante.Prix,
-                StringFormat='Prix enregistré : {0:F2} CRD'}" />
-            <Label Text="Cliquez d’abord sur Charger mon offre pour vérifier si une offre existe déjà." />
-            <VerticalStackLayout Spacing="10"
-                IsEnabled="{Binding EstDisponible}">
-                <Button Text="Charger mon offre"
-                        Command="{Binding ChargerOffreCommand}" />
-                <Entry Text="{Binding PrixSaisi}" Keyboard="Numeric"
-                       Placeholder="Prix de vente en CRD" />
-                <Button Text="Créer l'offre"
-                        Command="{Binding CreerOffreCommand}" />
-                <Button Text="Modifier le prix"
-                        Command="{Binding ModifierOffreCommand}" />
-                <Button Text="Supprimer l'offre"
-                        Command="{Binding SupprimerOffreCommand}" />
+    BackgroundColor="#0F0F12"
+    Shell.NavBarIsVisible="False"
+    Title="Marché">
+
+    <ContentPage.Resources>
+        <Color x:Key="Fond">#111115</Color>
+        <Color x:Key="Bordure">#26262C</Color>
+        <Color x:Key="Orange">#F59E0B</Color>
+        <Color x:Key="Gris">#8A8A93</Color>
+        <Color x:Key="Vert">#10B981</Color>
+        <Color x:Key="Rouge">#EF4444</Color>
+
+        <!-- Bouton grisé « Connexion requise » -->
+        <Style x:Key="BoutonVerrouille" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#26262C" />
+            <Setter Property="TextColor" Value="{StaticResource Gris}" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="HeightRequest" Value="34" />
+            <Setter Property="IsEnabled" Value="False" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid Padding="16" RowSpacing="12"
+          RowDefinitions="Auto,Auto,Auto,*,Auto,Auto">
+
+        <!-- En-tête -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+            <VerticalStackLayout Spacing="2">
+                <Label Text="FazMarket - Visiteur" FontSize="20"
+                       FontAttributes="Bold" TextColor="White" />
+                <Label Text="Base de données dégradée" FontSize="11"
+                       TextColor="{StaticResource Gris}" />
             </VerticalStackLayout>
-            <ActivityIndicator
-                IsRunning="{Binding EstOccupe}"
-                IsVisible="{Binding EstOccupe}" />
-            <Label Text="{Binding Message}" />
-        </VerticalStackLayout>
-    </ScrollView>
+            <Border Grid.Column="1" VerticalOptions="Start"
+                    Stroke="{StaticResource Vert}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 4" Padding="8,3"
+                    BackgroundColor="Transparent">
+                <Label Text="INVITÉ" FontSize="9" CharacterSpacing="1"
+                       TextColor="{StaticResource Vert}" />
+            </Border>
+        </Grid>
+
+        <!-- Bandeau : actions restreintes -->
+        <Border Grid.Row="1"
+                BackgroundColor="#2A1215"
+                Stroke="{StaticResource Rouge}"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 10"
+                Padding="12">
+            <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+                <Label Grid.Column="0" Text="⚠" FontSize="20"
+                       TextColor="{StaticResource Rouge}"
+                       VerticalOptions="Center" />
+                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                    <Label Text="Actions restreintes" FontSize="12"
+                           FontAttributes="Bold" TextColor="White" />
+                    <Label Text="Connectez-vous pour acheter, vendre ou échanger vos cartes."
+                           FontSize="10" TextColor="{StaticResource Gris}" />
+                </VerticalStackLayout>
+                <Button Grid.Column="2" Text="S'inscrire"
+                        BackgroundColor="{StaticResource Rouge}"
+                        TextColor="White" FontSize="11" FontAttributes="Bold"
+                        CornerRadius="8" HeightRequest="34" Padding="12,0"
+                        VerticalOptions="Center"
+                        Command="{Binding InscriptionCommand}" />
+            </Grid>
+        </Border>
+
+        <!-- Titre -->
+        <Label Grid.Row="2" Text="Animatronics disponibles (Visiteur)"
+               FontSize="16" FontAttributes="Bold" TextColor="White" />
+
+        <!-- Liste des cartes -->
+        <CollectionView Grid.Row="3"
+                        ItemsSource="{Binding Cartes}"
+                        SelectionMode="None">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2"
+                                 HorizontalItemSpacing="10"
+                                 VerticalItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.EmptyView>
+                <Label Text="Aucune carte disponible pour le moment."
+                       TextColor="{StaticResource Gris}"
+                       HorizontalTextAlignment="Center" />
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="{StaticResource Fond}"
+                            Stroke="{StaticResource Bordure}"
+                            StrokeShape="RoundRectangle 12"
+                            Padding="0">
+                        <VerticalStackLayout Spacing="0">
+
+                            <Image Source="{Binding ImageUrl}"
+                                   Aspect="AspectFill"
+                                   HeightRequest="110"
+                                   BackgroundColor="#0F0F12" />
+
+                            <VerticalStackLayout Padding="10" Spacing="6">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label FontSize="10" FontAttributes="Bold"
+                                           TextColor="{StaticResource Orange}"
+                                           VerticalOptions="Center">
+                                        <Label.Text>
+                                            <MultiBinding StringFormat="#{0} • {1}">
+                                                <Binding Path="Numero" />
+                                                <Binding Path="Rarete" />
+                                            </MultiBinding>
+                                        </Label.Text>
+                                    </Label>
+                                    <Label Grid.Column="1"
+                                           Text="{Binding Prix, StringFormat='{0:N2} €'}"
+                                           FontSize="11" TextColor="White"
+                                           VerticalOptions="Center" />
+                                </Grid>
+
+                                <Label Text="{Binding Nom}"
+                                       FontSize="14" FontAttributes="Bold"
+                                       TextColor="White"
+                                       LineBreakMode="TailTruncation" />
+
+                                <Button Text="🔑 Connexion requise"
+                                        Style="{StaticResource BoutonVerrouille}" />
+                            </VerticalStackLayout>
+
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Synchronisation en cours -->
+        <Border Grid.Row="4"
+                IsVisible="{Binding EstSynchronisation}"
+                BackgroundColor="{StaticResource Fond}"
+                Stroke="{StaticResource Bordure}"
+                StrokeShape="RoundRectangle 12"
+                Padding="12">
+            <VerticalStackLayout Spacing="10">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="Chargement progressif du flux..."
+                           FontSize="10" TextColor="{StaticResource Gris}"
+                           VerticalOptions="Center" />
+                    <Label Grid.Column="1" Text="SYNCHRONISATION"
+                           FontSize="9" CharacterSpacing="1"
+                           TextColor="{StaticResource Orange}"
+                           VerticalOptions="Center" />
+                </Grid>
+
+                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                    <Border WidthRequest="44" HeightRequest="44"
+                            StrokeShape="RoundRectangle 8"
+                            StrokeThickness="0"
+                            BackgroundColor="{StaticResource Bordure}" />
+                    <VerticalStackLayout Grid.Column="1" Spacing="6"
+                                         VerticalOptions="Center">
+                        <BoxView HeightRequest="8" CornerRadius="4"
+                                 Color="{StaticResource Bordure}"
+                                 HorizontalOptions="Fill" />
+                        <BoxView HeightRequest="8" CornerRadius="4"
+                                 Color="{StaticResource Bordure}"
+                                 WidthRequest="90"
+                                 HorizontalOptions="Start" />
+                    </VerticalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Pagination -->
+        <Grid Grid.Row="5" ColumnDefinitions="*,Auto">
+            <Label Text="{Binding TexteResultats}"
+                   FontSize="11" TextColor="{StaticResource Gris}"
+                   VerticalOptions="Center" />
+            <Button Grid.Column="1" Text="Suivant &gt;"
+                    BackgroundColor="#0F0F12"
+                    TextColor="White" FontSize="11"
+                    BorderColor="{StaticResource Bordure}" BorderWidth="1"
+                    CornerRadius="8" HeightRequest="34" Padding="14,0"
+                    Command="{Binding SuivantCommand}" />
+        </Grid>
+
+    </Grid>
 </ContentPage>

@@ -10,6 +10,9 @@ public class Carte
     private string marque = "";
     private string modele = "";
     private string variante = "";
+    private string rarete = "";
+    private string imageUrl {  get; set; }
+    private Cotation? Cotation { get; set; }
 
     #endregion
 
@@ -45,6 +48,12 @@ public class Carte
     {
         get { return variante; }
         set { variante = value; }
+    }
+    [JsonProperty("rarity")]
+    public string Rarete
+    {
+        get { return rarete; }
+        set { rarete = value; }
     }
 
     #endregion

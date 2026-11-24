@@ -21,6 +21,27 @@
         <member name="P:FnafTCG.VuesModeles.CartesVueModele.EstOccupe">
             <inheritdoc cref="F:FnafTCG.VuesModeles.CartesVueModele.estOccupe"/>
         </member>
+        <member name="P:FnafTCG.VuesModeles.CartesVueModele.NbLegendaire">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.CartesVueModele.nbLegendaire"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.CartesVueModele.NbEpic">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.CartesVueModele.nbEpic"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.CartesVueModele.NbRare">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.CartesVueModele.nbRare"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.CartesVueModele.NbCommun">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.CartesVueModele.nbCommun"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.CartesVueModele.ValeurTotale">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.CartesVueModele.valeurTotale"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.CartesVueModele.VariationPourcentage">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.CartesVueModele.variationPourcentage"/>
+        </member>
+        <member name="P:FnafTCG.VuesModeles.CartesVueModele.Catalogue">
+            <inheritdoc cref="F:FnafTCG.VuesModeles.CartesVueModele.catalogue"/>
+        </member>
         <member name="F:FnafTCG.VuesModeles.CartesVueModele.chargerCartesCommand">
             <summary>The backing field for <see cref="P:FnafTCG.VuesModeles.CartesVueModele.ChargerCartesCommand"/>.</summary>
         </member>
@@ -113,6 +134,9 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CartesPossedees">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CartesPossedees" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.TotalCartes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "TotalCartes" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CarteSelectionnee">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CarteSelectionnee" generated properties.</summary>
         </member>
@@ -124,6 +148,27 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EstDisponible">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EstDisponible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NbLegendaire">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NbLegendaire" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NbEpic">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NbEpic" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NbRare">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NbRare" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NbCommun">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NbCommun" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ValeurTotale">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ValeurTotale" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.VariationPourcentage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "VariationPourcentage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Catalogue">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Catalogue" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Identifiant">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Identifiant" generated properties.</summary>
@@ -146,6 +191,9 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CartesPossedees">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CartesPossedees" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.TotalCartes">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "TotalCartes" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CarteSelectionnee">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CarteSelectionnee" generated properties.</summary>
         </member>
@@ -157,6 +205,27 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EstDisponible">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EstDisponible" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NbLegendaire">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NbLegendaire" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NbEpic">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NbEpic" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NbRare">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NbRare" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NbCommun">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NbCommun" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ValeurTotale">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ValeurTotale" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.VariationPourcentage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "VariationPourcentage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Catalogue">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Catalogue" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Identifiant">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Identifiant" generated properties.</summary>

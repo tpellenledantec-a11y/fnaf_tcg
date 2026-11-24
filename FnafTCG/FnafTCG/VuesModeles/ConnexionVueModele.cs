@@ -54,8 +54,7 @@ public partial class ConnexionVueModele : ObservableObject
             await serviceApi.SeConnecterAsync(
                 Identifiant.Trim(), MotDePasse);
             MotDePasse = "";
-            await Application.Current!.Windows[0].Page!
-                .Navigation.PushAsync(new CartesPage());
+            Application.Current!.Windows[0].Page = new AppShell();
         }
         catch (Exception erreur)
         {

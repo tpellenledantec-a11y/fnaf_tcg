@@ -185,6 +185,18 @@ public class ServiceApi
             await client.DeleteAsync("offers/" + identifiantOffre);
         await LireReponseAsync(reponse);
     }
+    public async Task<List<Carte>> ObtenirCartesAsync()
+    {
+        using HttpResponseMessage reponse =
+            await client.GetAsync("cards");
+        string json = await LireReponseAsync(reponse);
+        ReponseCatalogue? resultat = JsonConvert
+            .DeserializeObject<ReponseCatalogue>(json);
 
+        if (resultat == null)
+            throw new Exception("Le catalogue est absent.");
+
+        return resultat.Cartes;
+    }
     #endregion
 }

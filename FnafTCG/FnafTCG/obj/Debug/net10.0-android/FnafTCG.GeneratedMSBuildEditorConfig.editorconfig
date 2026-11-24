@@ -92,6 +92,16 @@ build_metadata.AdditionalFiles.NoWarn =
 build_metadata.AdditionalFiles.EnableDiagnostics = 
 build_metadata.AdditionalFiles.LineInfo = 
 
+[C:/Users/utilisateur/source/repos/FnafTCG/FnafTCG/Vues/CatalogueVisiteurPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = FnafTCG.Vues.CatalogueVisiteurPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Vues\CatalogueVisiteurPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Vues\CatalogueVisiteurPage.xaml
+build_metadata.AdditionalFiles.Inflator = SourceGen
+build_metadata.AdditionalFiles.NoWarn = 
+build_metadata.AdditionalFiles.EnableDiagnostics = 
+build_metadata.AdditionalFiles.LineInfo = 
+
 [C:/Users/utilisateur/source/repos/FnafTCG/FnafTCG/Vues/ConnexionPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = FnafTCG.Vues.ConnexionPage.xaml

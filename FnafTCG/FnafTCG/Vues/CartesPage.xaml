@@ -4,44 +4,188 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:FnafTCG.VuesModeles"
     xmlns:modeles="clr-namespace:FnafTCG.Modeles"
+    xmlns:vues="clr-namespace:FnafTCG.Vues"
     x:Class="FnafTCG.Vues.CartesPage"
     x:DataType="vm:CartesVueModele"
-    Title="Mes cartes">
-    <Grid Padding="20" RowSpacing="12"
-          RowDefinitions="Auto,Auto,*,Auto,Auto">
-        <Button Text="Afficher mes cartes"
+    BackgroundColor="#0F0F12"
+    Shell.TabBarIsVisible="True">
+
+    <ContentPage.Resources>
+        <Color x:Key="Fond">#111115</Color>
+        <Color x:Key="Bordure">#060608</Color>
+        <Color x:Key="Orange">#F59E0B</Color>
+        <Color x:Key="Gris">#8A8A93</Color>
+        <Color x:Key="Vert">#10B981</Color>
+        <Color x:Key="Or">#FFD700</Color>
+        <Color x:Key="Bleu">#3B82F6</Color>
+        <Color x:Key="Violet">#9B59F6</Color>
+        <vues:RareteCouleurConvertisseur x:Key="RareteCouleur" />
+
+        <!-- Boutons noirs avec contour et texte orange -->
+        <Style x:Key="BoutonPrincipal" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#0F0F12" />
+            <Setter Property="TextColor" Value="{StaticResource Orange}" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="BorderColor" Value="{StaticResource Orange}" />
+            <Setter Property="BorderWidth" Value="2" />
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid Padding="16" RowSpacing="12"
+          RowDefinitions="Auto,Auto,Auto,Auto,Auto,*,Auto,Auto">
+
+        <!-- En-tête : Mon Portefeuille -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Mon Portefeuille" FontSize="22"
+                       FontAttributes="Bold" TextColor="White" />
+                <Label Text="Actifs &amp; Inventaire Réseau" FontSize="11"
+                       TextColor="{StaticResource Gris}" />
+            </VerticalStackLayout>
+            <Border Grid.Column="1" VerticalOptions="Start"
+                    Stroke="{StaticResource Vert}" StrokeThickness="1"
+                    StrokeShape="RoundRectangle 4" Padding="8,3"
+                    BackgroundColor="Transparent">
+                <Label Text="SÉCURISÉ" FontSize="9" CharacterSpacing="1"
+                       TextColor="{StaticResource Vert}" />
+            </Border>
+        </Grid>
+
+        <!-- Carte récapitulative -->
+        <Border Grid.Row="1"
+                BackgroundColor="{StaticResource Fond}"
+                Stroke="{StaticResource Bordure}"
+                StrokeShape="RoundRectangle 14"
+                Padding="16">
+            <VerticalStackLayout Spacing="10">
+
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Text="VALEUR TOTALE ESTIMÉE (SERVEUR)"
+                           FontSize="10" CharacterSpacing="1"
+                           TextColor="{StaticResource Gris}"
+                           VerticalOptions="Center" />
+                    <Label Grid.Column="1" Text="● Temps Réel"
+                           FontSize="10"
+                           TextColor="{StaticResource Vert}"
+                           VerticalOptions="Center" />
+                </Grid>
+
+                <HorizontalStackLayout Spacing="8">
+                    <Label Text="{Binding ValeurTotale, StringFormat='{0:N2} €'}"
+                           FontSize="30" FontAttributes="Bold"
+                           TextColor="White" />
+                </HorizontalStackLayout>
+
+                <BoxView HeightRequest="1" Color="{StaticResource Bordure}" />
+
+                <Grid ColumnDefinitions="*,*,*">
+                    <VerticalStackLayout Grid.Column="0" Spacing="2">
+                        <Label Text="OR" FontSize="10" TextColor="{StaticResource Gris}" />
+                        <Label Text="{Binding NbLegendaire, StringFormat='{0} cartes'}"
+                               FontSize="13" FontAttributes="Bold"
+                               TextColor="{StaticResource Orange}" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="1" Spacing="2">
+                        <Label Text="RARE" FontSize="10" TextColor="{StaticResource Gris}" />
+                        <Label Text="{Binding NbRare, StringFormat='{0} cartes'}"
+                               FontSize="13" FontAttributes="Bold"
+                               TextColor="White" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Grid.Column="2" Spacing="2">
+                        <Label Text="COMMUN" FontSize="10" TextColor="{StaticResource Gris}" />
+                        <Label Text="{Binding NbCommun, StringFormat='{0} cartes'}"
+                               FontSize="13" FontAttributes="Bold"
+                               TextColor="White" />
+                    </VerticalStackLayout>
+                </Grid>
+
+            </VerticalStackLayout>
+        </Border>
+
+        <Button Grid.Row="2" Text="Afficher mes cartes"
+                Style="{StaticResource BoutonPrincipal}"
                 IsEnabled="{Binding EstDisponible}"
                 Command="{Binding ChargerCartesCommand}" />
-        <Label Grid.Row="1" Text="{Binding Message}" />
-        <CollectionView Grid.Row="2"
-            ItemsSource="{Binding CartesPossedees}"
-            SelectedItem="{Binding CarteSelectionnee}"
-            SelectionMode="Single"
-            IsEnabled="{Binding EstDisponible}">
+
+        <Label Grid.Row="3" Text="{Binding Message}"
+               TextColor="{StaticResource Gris}" FontSize="12" />
+
+        <!-- Titre de la liste + tri -->
+        <Grid Grid.Row="4" ColumnDefinitions="*,Auto">
+            <Label Text="{Binding TotalCartes, StringFormat='Mes Cartes Possédées ({0})'}"
+                   TextColor="White" FontSize="16" FontAttributes="Bold"
+                   VerticalOptions="Center" />
+            <Label Grid.Column="1" Text="Trier : Rareté ▾"
+                   FontSize="11" TextColor="{StaticResource Gris}"
+                   VerticalOptions="Center" />
+        </Grid>
+
+        <CollectionView Grid.Row="5"
+                        ItemsSource="{Binding CartesPossedees}"
+                        SelectedItem="{Binding CarteSelectionnee}"
+                        SelectionMode="Single"
+                        IsEnabled="{Binding EstDisponible}">
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" Span="2"
+                                 HorizontalItemSpacing="10"
+                                 VerticalItemSpacing="10" />
+            </CollectionView.ItemsLayout>
+
             <CollectionView.EmptyView>
-                <Label Text="Cliquez sur Afficher mes cartes pour charger votre collection." />
+                <Label Text="Cliquez sur Afficher mes cartes pour charger votre collection."
+                       TextColor="{StaticResource Gris}"
+                       HorizontalTextAlignment="Center" />
             </CollectionView.EmptyView>
+
             <CollectionView.ItemTemplate>
-                <DataTemplate
-                    x:DataType="modeles:CartePossedee">
-                    <Border Margin="0,4" Padding="12">
+                <DataTemplate x:DataType="modeles:CartePossedee">
+                    <Border BackgroundColor="{StaticResource Fond}"
+                            Stroke="{StaticResource Bordure}"
+                            StrokeShape="RoundRectangle 12"
+                            Padding="12">
                         <VerticalStackLayout Spacing="4">
+                            <Label Text="{Binding Carte.Rarete}"
+                                   FontSize="13"
+                                   TextTransform="Uppercase"
+                                   TextColor="{Binding Carte.Rarete, Converter={StaticResource RareteCouleur}}"/>
                             <Label Text="{Binding Carte.Marque}"
-                                   FontAttributes="Bold" />
-                            <Label Text="{Binding Carte.Modele}" />
-                            <Label Text="{Binding Carte.Variante}" />
-                            <Label Text="{Binding ValeurActuelle,
-                                StringFormat='Valeur : {0:F2} CRD'}" />
+                                   FontSize="11" FontAttributes="Bold"
+                                   TextColor="{StaticResource Orange}" />
+                            <Label Text="{Binding Carte.Modele}"
+                                   FontSize="14" FontAttributes="Bold"
+                                   TextColor="White"
+                                   LineBreakMode="TailTruncation" />
+                            <Label Text="{Binding Carte.Variante}"
+                                   FontSize="11"
+                                   TextColor="{StaticResource Gris}" />
+
+                            <Grid ColumnDefinitions="*,Auto" Margin="0,6,0,0">
+                                <Label Text="Valeur :" FontSize="11"
+                                       TextColor="{StaticResource Gris}"
+                                       VerticalOptions="Center" />
+                                <Label Grid.Column="1"
+                                       Text="{Binding ValeurActuelle, StringFormat='{0:F2} €'}"
+                                       FontSize="12" FontAttributes="Bold"
+                                       TextColor="{StaticResource Orange}" />
+                            </Grid>
                         </VerticalStackLayout>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button Grid.Row="3" Text="Gérer l'offre"
+
+        <Button Grid.Row="6" Text="Gérer l'offre"
+                Style="{StaticResource BoutonPrincipal}"
                 IsEnabled="{Binding EstDisponible}"
                 Command="{Binding GererOffreCommand}" />
-        <ActivityIndicator Grid.Row="4"
-            IsRunning="{Binding EstOccupe}"
-            IsVisible="{Binding EstOccupe}" />
+
+        <ActivityIndicator Grid.Row="7"
+                           Color="{StaticResource Orange}"
+                           IsRunning="{Binding EstOccupe}"
+                           IsVisible="{Binding EstOccupe}" />
     </Grid>
 </ContentPage>
